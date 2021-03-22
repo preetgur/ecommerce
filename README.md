@@ -15,3 +15,8 @@ Create Github Repo and clone that repo in your local computer so that all the ch
 >> npm start
 
 Now cleaning up the mess!!
+
+# Installing VS Code Library
+>> Bracket Pair Colorizer
+>> Auto Rename Tag
+>> Prettier
