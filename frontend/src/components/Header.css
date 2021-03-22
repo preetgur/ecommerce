@@ -1,0 +1,26 @@
+.header{
+    background: rgb(51 48 48);
+    color:whitesmoke;
+    text-transform: uppercase;
+    display: flex;
+    padding: 30px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    cursor: pointer;
+}
+
+.header__logo{
+    font-size: medium;
+    font-weight: 600;
+    font-family: sans-serif;
+    padding: 20px;
+}
+
+.header__options{
+    margin: 0 20px 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    font-size: small;
+    font-family: monospace;
+}
