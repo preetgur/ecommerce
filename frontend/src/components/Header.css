@@ -24,3 +24,8 @@
     font-size: small;
     font-family: monospace;
 }
+
+.header__options__one, .header__options__two{
+    display: flex;
+    gap: 10px;
+}

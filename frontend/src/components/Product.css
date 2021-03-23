@@ -1,0 +1,28 @@
+.product
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid whitesmoke;
+    padding: 10px;
+    margin: 10px;
+    
+    gap: 15px;
+    border-radius: 10px;
+}
+
+.product__name
+{
+    font-size: large;
+}
+.product__img
+{
+    height: 220px;
+    object-fit: contain;
+}
+
+.product__price
+{
+    font-weight: 700;
+    font-family: cursive;
+}
