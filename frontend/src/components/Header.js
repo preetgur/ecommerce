@@ -1,10 +1,14 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './Header.css'
 
 function Header() {
     return (
         <div className="header">
-            <div className="header__logo">proshop</div>
+            <Link to="/" className="header__logo">
+                proshop
+
+            </Link>
             <div className="header__options">
                 <div className="header__options__one">
                    <i className="fas fa-shopping-cart"></i> cart
