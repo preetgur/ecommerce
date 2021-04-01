@@ -4,7 +4,6 @@ import Product from '../components/Product'
 import './HomeScreen.css'
 import axios from "axios"
 import { listProduct } from '../actions/productActions'
-import { productListReducers } from '../reducers/productReducers'
 import { useDispatch, useSelector } from 'react-redux'
 
 function HomeScreen() {
