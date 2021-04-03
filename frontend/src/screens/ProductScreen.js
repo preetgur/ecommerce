@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router'
+import { useHistory, useParams } from 'react-router'
 import { Link } from 'react-router-dom'
 import Rating from '../components/Rating'
 import './ProductScreen.css'
@@ -13,17 +13,25 @@ function ProductScreen() {
     
 
     const params = useParams()
+    const history = useHistory()
     const dispatch = useDispatch()
 
     const productDetail = useSelector(state => state.productDetail)
     // productDetail used from store.js
     const { product, loading, error } = productDetail
+    const [qty, setQty] = useState(1)
 
     useEffect(() => {
 
         dispatch(detailProduct(params.id))
     }, [dispatch,params])
 
+    const addToCartHandler = () => {
+        console.log('add to cart ... ', params.id, qty);
+        // redirect to cart page
+        history.push(`/cart/${product._id}?qty=${qty}`)
+        
+    }
 
     return (
         <div className="productScreen">
@@ -55,17 +63,18 @@ function ProductScreen() {
                                 <div className="productScreen__row3__qty">
                                 <div className="productScreen__row3__qty__1">Quantity</div>
                                 <div className="productScreen__row3__qty__2">
-                                    <select> 
+                                    <select onChange={(e)=>setQty(e.target.value)}> 
                                     {[...Array(product.countInStock).keys()].map(x => (
                                     <option key={x+1} value={x+1}>{x + 1}</option>
                                     ))}
                                     </select>
+                            
                                 </div>
                                 </div>
 
                                 }
 
-                            <button className="productScreen__btn" disabled={product.countInStock === 0} >{product.countInStock > 0 ? "Buy Now" : "Out Of Stock"}</button>
+                            <button className="productScreen__btn" disabled={product.countInStock === 0} onClick={addToCartHandler} >{product.countInStock > 0 ? "Add To Cart" : "Out Of Stock"}</button>
 
                         </div>
                     </div>)

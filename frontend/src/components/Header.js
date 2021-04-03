@@ -11,7 +11,10 @@ function Header() {
             </Link>
             <div className="header__options">
                 <div className="header__options__one">
-                   <i className="fas fa-shopping-cart"></i> cart
+                    <Link to="/cart">
+                        <i className="fas fa-shopping-cart"></i> cart
+
+                    </Link>
                 </div>
                 <div className="header__options__two">
                     <i className="fas fa-user"></i>

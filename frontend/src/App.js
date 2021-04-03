@@ -3,6 +3,7 @@ import Footer from './components/Footer'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import HomeScreen from './screens/HomeScreen' 
 import ProductScreen from './screens/ProductScreen';
+import CartScreen from './screens/CartScreen';
 
 
 function App() {
@@ -22,6 +23,12 @@ function App() {
         
           </Route>
           
+          <Route path="/cart/:id?"> 
+          {/* optional id */}
+            <Header />
+            <CartScreen />
+
+          </Route>
        
 
         <Route path="/">
