@@ -50,10 +50,24 @@ function ProductScreen() {
                         <div className="productScreen__row3">
                             <div className="productScreen__row3__price">Price :{product.price}</div>
                             <div className="productScreen__row3__status">status :{product.countInStock > 0 ? "In Stock" : "Out of Stock"}</div>
+
+                            {product.countInStock > 0 &&
+                                <div className="productScreen__row3__qty">
+                                <div className="productScreen__row3__qty__1">Quantity</div>
+                                <div className="productScreen__row3__qty__2">
+                                    <select> 
+                                    {[...Array(product.countInStock).keys()].map(x => (
+                                    <option key={x+1} value={x+1}>{x + 1}</option>
+                                    ))}
+                                    </select>
+                                </div>
+                                </div>
+
+                                }
+
                             <button className="productScreen__btn" disabled={product.countInStock === 0} >{product.countInStock > 0 ? "Buy Now" : "Out Of Stock"}</button>
 
                         </div>
-
                     </div>)
 
                  }

@@ -26,6 +26,7 @@ export const productListReducers = (state = { products: [] }, action) => {
     }
 }
 
+
 export const productDetailsReducers = (state = { product: {reviews:[]} }, action) => {
    
 
