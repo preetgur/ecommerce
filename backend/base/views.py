@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from .products import products
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import ProductSerializer, UserSerializer
+from .serializers import ProductSerializer, UserSerializer,UserSerializerWithToken
 from .models import Product
 # Create your views here.
 
@@ -18,8 +18,12 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
        data = super().validate(attrs)
 
        # get username and email when user login
-       data['username'] = self.user.username
-       data['email'] = self.user.email
+    #    data['username'] = self.user.username
+    #    data['email'] = self.user.email
+
+       serializer = UserSerializerWithToken(self.user).data
+       for k,v in serializer.items():
+           data[k] = v
        
        return data
 
