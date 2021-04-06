@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from .products import products
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .serializers import ProductSerializer
+from .serializers import ProductSerializer, UserSerializer
 from .models import Product
 # Create your views here.
 
@@ -14,10 +14,10 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
     # overrides the validate method
    def validate(self,attrs):
-       print("attrs .. ",attrs)
+   
        data = super().validate(attrs)
 
-       # get username and email 
+       # get username and email when user login
        data['username'] = self.user.username
        data['email'] = self.user.email
        
@@ -51,4 +51,14 @@ def getProduct(request,pk):
     #        product = i
     #        break
    
-    re
+    return Response(serialzer.data)    
+
+
+@api_view(['GET'])
+def userProfile(request):
+
+    user = request.user
+    serialzer = UserSerializer(user,many=False) 
+
+   
+    return Response(serialzer.data)

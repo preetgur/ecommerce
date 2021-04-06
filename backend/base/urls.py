@@ -8,4 +8,6 @@ urlpatterns = [
     path('getProduct/<str:pk>/',views.getProduct,name="getProduct"),
 
     path('api/user/login', views.MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/user/profile/',views.userProfile,name="userProfile"),
+
 ]
