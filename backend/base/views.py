@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from .products import products
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view,permission_classes 
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from django.contrib.auth.models import User
 from rest_framework.response import Response
 from .serializers import ProductSerializer, UserSerializer,UserSerializerWithToken
 from .models import Product
@@ -59,10 +61,21 @@ def getProduct(request,pk):
 
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def userProfile(request):
 
     user = request.user
     serialzer = UserSerializer(user,many=False) 
 
    
+    return Response(serialzer.data)
+
+
+@api_view(['GET'])
+@permission_classes([IsAdminUser])
+def getUsers(request):
+
+    user = User.objects.all()
+    serialzer = UserSerializer(user,many=True) 
+
     return Response(serialzer.data)
