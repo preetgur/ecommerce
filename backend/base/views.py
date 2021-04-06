@@ -102,4 +102,4 @@ def registerUser(request):
 
     except : 
         message = { "details " : "User with this email is already exists"}
-        return Response(message,status= status.HTTP_400 _BAD_REQUEST)    
+        return Response(message,status= status.HTTP_400_BAD_REQUEST)    
