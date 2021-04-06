@@ -9,5 +9,7 @@ urlpatterns = [
 
     path('api/user/login', views.MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/user/profile/',views.userProfile,name="userProfile"),
+    path('api/users/',views.getUsers,name="getUsers"),
+
 
 ]
