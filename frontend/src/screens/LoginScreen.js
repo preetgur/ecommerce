@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory, useLocation } from 'react-router-dom'
-import { userLogin } from '../actions/userActions'
+import { userLogin } from '../actions/userActions' 
 import './LoginScreen.css'
 
 function LoginScreen() {

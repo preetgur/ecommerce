@@ -5,6 +5,7 @@ import HomeScreen from './screens/HomeScreen'
 import ProductScreen from './screens/ProductScreen';
 import CartScreen from './screens/CartScreen';
 import LoginScreen from './screens/LoginScreen';
+import RegisterScreen from './screens/RegisterScreen';
 
 
 function App() {
@@ -35,7 +36,13 @@ function App() {
           <Header />
           <LoginScreen />
 
-        </Route>
+          </Route>
+          
+          <Route path="/register">
+            <Header />
+            <RegisterScreen />
+
+          </Route>
           
         <Route path="/">
           <Header />
