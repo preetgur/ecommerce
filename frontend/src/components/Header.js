@@ -17,8 +17,10 @@ function Header() {
                     </Link>
                 </div>
                 <div className="header__options__two">
-                    <i className="fas fa-user"></i>
-                    login
+                    <Link to="/login">
+                        <i className="fas fa-user"></i>
+                        Login
+                    </Link>
                 </div>
             </div>
         </div>

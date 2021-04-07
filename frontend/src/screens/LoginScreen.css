@@ -1,0 +1,58 @@
+.loginScreen{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 20px;
+
+}
+
+.loginScreen__error{
+   color: red;
+    font-size: small;
+    background: blanchedalmond;
+    padding: 10px;
+}
+
+.loginScreen__container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    font-family: sans-serif;
+}
+
+.loginScreen__container > h1
+{
+    font-weight: 100;
+    font-family: sans-serif;
+    text-transform: uppercase;
+}
+
+.loginScreen__email,.loginScreen__password{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 10px 0;
+}
+
+.loginScreen__btn{
+        padding: 10px;
+    border: none;
+    background: black;
+    color: white;
+    text-transform: uppercase;
+}
+
+.loginScreen__email > input[type="email" ] , input[type="password"]{
+    padding: 10px;
+    border: none;
+    width: 300px;
+    background: gainsboro;
+}
+
+.loginScreen__container >p
+{
+    margin-top: 25px;
+    font-size: smaller;
+}
