@@ -24,10 +24,21 @@
     align-items: center;
     gap: 30px;
     font-size: small;
-    font-family: monospace;
+    font-family: monospace; 
 }
 
 .header__options__one, .header__options__two{
     display: flex;
     gap: 10px;
+    color:white;
+}
+
+.header__logout{
+    font-family: monospace; 
+        border: none;
+    background: none;
+    text-transform: uppercase;
+    color: white;
+    font-size: small;
+
 }
