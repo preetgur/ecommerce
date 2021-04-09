@@ -9,7 +9,7 @@ function Header() {
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
     const dispatch = useDispatch()
-    const localData = JSON.parse(localStorage.getItem('userInfo'))
+    // const userInfo = JSON.parse(localStorage.getItem('userInfo'))
 
     const logoutHandler = () => {
         dispatch(logout())
@@ -29,7 +29,7 @@ function Header() {
                     </Link>
                 </div>
                 <div className="header__options__two">
-                    {localData ? localData.username : <Link to="/login">
+                    {userInfo ? <Link to="/profile">{userInfo.username} </Link> : <Link to="/login">
                         <i className="fas fa-user"></i>
                     login
                     </Link>}
@@ -38,7 +38,7 @@ function Header() {
                 </div>
 
                 <div className="header__options__two">
-                    {localData && <button className="header__logout" onClick={logoutHandler}>Logout</button>}
+                    {userInfo && <button className="header__logout" onClick={logoutHandler}>Logout</button>}
 
 
                 </div>

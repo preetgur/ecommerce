@@ -25,6 +25,6 @@ export const userLoginReducer = (state = initialState,action) => {
             return { loading: false, userInfo : {}}
         
         default:
-            return {}
+            return state
     }
 }
