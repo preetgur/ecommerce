@@ -1,0 +1,22 @@
+.checkoutSteps{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    /* border: 1px solid; */
+    width: 60%;
+    margin: 10px 0;
+    padding: 10px;
+}
+
+
+.checkoutSteps__link{
+    text-decoration: none;
+    font-size: larger;
+    color: black;
+    font-family: sans-serif;
+}
+
+.checkoutSteps__disabled{
+    border: none;
+    color: lightgrey;
+}

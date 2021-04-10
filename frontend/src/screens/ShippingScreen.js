@@ -16,9 +16,9 @@ function ShippingScreen() {
 
     const dispatch = useDispatch()
     const history = useHistory()
-    const shippingAddress = useSelector(state => state.shippingAddress)
+    const shippingAddr = useSelector(state => state.shippingAddress)
 
-    console.log('shipping add .. ',shippingAddress);
+    console.log('shipping add .. ',shippingAddr);
     
     const shippingHandler = (e) => {
 
@@ -32,7 +32,7 @@ function ShippingScreen() {
             landmark
         }
         dispatch(saveShippingAddress(data))
-        localStorage.setItem('shipping',JSON.stringify(data))
+        // localStorage.setItem('shipping',JSON.stringify(data)) 
         
         history.push("/payment")
         

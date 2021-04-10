@@ -8,6 +8,7 @@ import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import ShippingScreen from './screens/ShippingScreen';
+import PaymentScreen from './screens/PaymentScreen';
 
 
 function App() {
@@ -45,6 +46,13 @@ function App() {
             <ShippingScreen />
 
           </Route>
+
+          <Route path="/payment">
+            <Header />
+            <PaymentScreen />
+
+          </Route>
+
 
           <Route path="/profile">
             <Header />
