@@ -2,6 +2,8 @@ import {
     USER_PROFILE_FAIL,
     USER_PROFILE_REQUEST,
     USER_PROFILE_SUCCESS,
+    USER_PROFILE_RESET,
+    
     USER_UPDATE_PROFILE_FAIL,
     USER_UPDATE_PROFILE_REQUEST,
     USER_UPDATE_PROFILE_RESET,
@@ -24,6 +26,8 @@ export const userProfileReducer = (state=initialState,action) =>{
         case USER_PROFILE_FAIL:
             return { loading: false, error: action.payload }
         
+        case USER_PROFILE_RESET:
+            return { user:{} }
         default:
             return state
     }

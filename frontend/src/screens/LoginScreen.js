@@ -23,6 +23,7 @@ function LoginScreen() {
         if (userInfo) {
             history.push(redirect)
         }
+        
     }, [history,userInfo,redirect])
   
     const userLoginHandler = (e) => {

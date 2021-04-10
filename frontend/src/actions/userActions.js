@@ -11,10 +11,11 @@ import {
     USER_PROFILE_REQUEST,
     USER_PROFILE_FAIL,
     USER_PROFILE_SUCCESS,
-    
+    USER_PROFILE_RESET,
+
     USER_UPDATE_PROFILE_REQUEST,
     USER_UPDATE_PROFILE_SUCCESS,
-    USER_UPDATE_PROFILE_FAIL
+    USER_UPDATE_PROFILE_FAIL,
 
 
 } from '../constants/userConstants'
@@ -65,6 +66,10 @@ export const logout = () => async(dispatch) => {
     dispatch({
         type : USER_LOGOUT
     })
+
+    // dispatch({
+    //     type : USER_PROFILE_RESET
+    // })
 }
 
 
@@ -199,7 +204,7 @@ export const userUpdateProfile = (email,name,password) => async(dispatch,getStat
             type : USER_LOGIN_SUCCESS,
             payload : data
         })
-        
+
         localStorage.setItem('userInfo', JSON.stringify(data))
 
     }
