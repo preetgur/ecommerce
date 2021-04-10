@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
 import { saveShippingAddress } from '../actions/cartActions'
+import CheckoutSteps from '../components/CheckoutSteps'
 import './ShippingScreen.css'
 
 function ShippingScreen() {
@@ -39,6 +40,7 @@ function ShippingScreen() {
 
     return (
         <div className="shipping">
+            <CheckoutSteps step1 step2/>
          
             <h1>Shipping Address</h1>
 
