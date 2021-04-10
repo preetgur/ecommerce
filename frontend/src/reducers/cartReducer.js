@@ -38,3 +38,17 @@ function cartReducer(state=initialState,action) {
 }
 
 export default cartReducer
+
+
+export const saveShipingAddressReducer = (state = {}, action) => {
+    
+    switch (action.type) {
+        case "SAVE_SHIPPING_ADDRESS":
+            
+            return {shipping : action.payload}
+    
+        default:
+            return {}
+    }
+
+}

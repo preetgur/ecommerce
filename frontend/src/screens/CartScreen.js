@@ -17,7 +17,7 @@ function CartScreen() {
 
     const productId = params.id
     const qty = location.search ? Number(location.search.split('=')[1]) : 1
-
+    
     useEffect(() => {
 
         if (productId) {
@@ -35,6 +35,7 @@ function CartScreen() {
    
     const checkoutHandler = () => {
         history.push('/login?redirect=shipping')
+        
     }
 
     return (

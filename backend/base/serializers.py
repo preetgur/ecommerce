@@ -55,3 +55,14 @@ class UserSerializerWithToken(UserSerializer):
         token = RefreshToken.for_user(obj)
 
         return str(token.access_token)
+
+
+class ShippingAddressSerializer(serializers.ModelSerializer):
+
+    # _id = serializers.SerializerMethodField(read_only=True)
+
+    class Meta :
+        model = ShippingAddress
+        fields = ['city','country','postalCode','address']
+
+ 

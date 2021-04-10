@@ -1,0 +1,48 @@
+.shipping{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.shipping >h1{
+    text-transform: uppercase;
+        font-family: monospace;
+}
+
+.shipping__container{
+
+}
+
+.shipping__form{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+   
+    width: 720px;
+    margin : 20px 0;
+}
+
+.shipping__form >input[type="text"]{
+   border-radius: 2px;
+    border: none;
+    padding: 10px;
+    margin: 10px;
+    width: 40%;
+    background: lightgrey;
+
+}
+
+.shipping__btn{
+    padding: 10px;
+    width: 40%;
+    border: none;
+    background: black;
+    border-radius: 2px;
+    color: white;
+    text-transform: uppercase;
+    margin-top: 20px;
+}

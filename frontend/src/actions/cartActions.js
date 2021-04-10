@@ -31,3 +31,27 @@ export const removeFromCart = (id) => async(dispatch, getState) => {
     localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems))
 
 }
+
+
+export const saveShippingAddress = (data) => async (dispatch,getState) =>{
+    
+    // get the user from state
+    const {
+        userLogin: { userInfo }
+    } = getState()
+
+    const config = {
+        headers: {
+            "Content-type": "application/json",
+            Authorization: `Bearer ${userInfo.token}`,
+        }
+    }
+
+    // const { respond } = await axios.post('api/orders/shipping', data, config)
+    // console.log('respond ..',respond);
+    
+    dispatch({
+        type: "SAVE_SHIPPING_ADDRESS",
+        payload: data
+    })
+}
