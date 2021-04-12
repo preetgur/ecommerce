@@ -3,8 +3,8 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view,permission_classes 
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from django.contrib.auth.models import User
-from rest_framework.response import Response
-from base.models import ShippingAddress,Order,OrderItem
+from rest_framework.response import Response 
+from base.models import ShippingAddress,Order,OrderItem,Product
 from base.serializers import ShippingAddressSerializer,OrderSerializer
 from rest_framework import status
 
@@ -38,7 +38,7 @@ def addOrderItem(request):
 
     user = request.user
     data = request.data
-    print("data .. ".data)
+    print("###### data .. ",request.data)
 
     orderItems = data['orderItems']
 
@@ -55,13 +55,13 @@ def addOrderItem(request):
         totalPrice = data['totalPrice'])
 
         # 2) create shipping 
-        shipping = Shipping.objects.create(
+        shipping = ShippingAddress.objects.create(
             order=order,
             address = data['shippingAddress']['address'],
             city = data['shippingAddress']['city'],
             country = data['shippingAddress']['country'],
             postalCode = data['shippingAddress']['postalCode'],
-            shippingPrice = data['shippingAddress']['shippingPrice']
+            shippingPrice = data['shippingPrice']
 
             )
 
@@ -83,5 +83,5 @@ def addOrderItem(request):
             product.countInStock -= orderItem.qty
             product.save()
 
-        serializer = OrderSerializer(order,many=True)
+        serializer = OrderSerializer(order,many=False)
     return Response(serializer.data)

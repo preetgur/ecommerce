@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import *
 from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.response import Response 
 
 class ProductSerializer(serializers.ModelSerializer):
 
@@ -83,9 +84,9 @@ class OrderSerializer(serializers.ModelSerializer):
 
     def get_order(self,obj):
 
-        item = obj.orderItem_set.all()    # OrderItem has "Fk" realtionship with "Order" model
+        item = obj.orderitem_set.all()    # OrderItem has "Fk" realtionship with "Order" model
         serializer = OrderItemSerializer(item,many=True) 
-        return Response(serializer.data)
+        return serializer.data
 
     def get_shippingAddress(self,obj):
 
@@ -99,8 +100,8 @@ class OrderSerializer(serializers.ModelSerializer):
 
         return address    
 
-    def get_order(self,obj):
+    def get_user(self,obj):
 
         user = obj.user  
         serializer = UserSerializer(user,many=False) 
-        return Response(serializer.data)    
+        return serializer.data    

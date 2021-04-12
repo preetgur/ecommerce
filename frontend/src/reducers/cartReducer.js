@@ -1,4 +1,4 @@
-import { CART_ADD_ITEM, CART_REMOVE_ITEM ,SAVE_PAYMENT_METHOD,SAVE_SHIPPING_ADDRESS} from '../constants/cartConstants' 
+import { CART_ADD_ITEM, CART_CLEAR, CART_REMOVE_ITEM ,SAVE_PAYMENT_METHOD,SAVE_SHIPPING_ADDRESS} from '../constants/cartConstants' 
 
 const initialState = {
     cartItems : []
@@ -31,6 +31,13 @@ function cartReducer(state=initialState,action) {
                 ...state,
                 cartItems: state.cartItems.filter( item => item.product !== action.payload) 
             }
+        
+        case CART_CLEAR:
+            return {
+                ...state,
+                cartItems: []
+            }
+
     
         default:
             return state

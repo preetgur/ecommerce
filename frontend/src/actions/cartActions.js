@@ -40,6 +40,7 @@ export const saveShippingAddress = (data) => async (dispatch,getState) =>{
         userLogin: { userInfo }
     } = getState()
 
+    
     const config = {
         headers: {
             "Content-type": "application/json",
@@ -60,7 +61,11 @@ export const saveShippingAddress = (data) => async (dispatch,getState) =>{
 }
 
 
-export const savePaymentMethod = (data) => async (dispatch) => {
+export const savePaymentMethod = (data) => async (dispatch,getState) => {
+
+    const { userLogin } = getState()
+
+    console.log('userInfo ..', userLogin);
 
     dispatch({
         type: SAVE_PAYMENT_METHOD,
