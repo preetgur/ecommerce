@@ -1,11 +1,12 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import CheckoutSteps from '../components/CheckoutSteps'
 import './PlaceOrderScreen.css'
 
 function PlaceOrderScreen() {
 
+    const dispatch = useDispatch()
     const shippingAddress = useSelector(state => state.shippingAddress)
     const { shipping } = shippingAddress
     
@@ -26,6 +27,7 @@ function PlaceOrderScreen() {
     const placeOrderHandler = () => {
         console.log('This is handler .. ');
         
+        // dispatch(addOrderItem())
     }
 
     return (

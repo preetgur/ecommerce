@@ -59,10 +59,48 @@ class UserSerializerWithToken(UserSerializer):
 
 class ShippingAddressSerializer(serializers.ModelSerializer):
 
-    # _id = serializers.SerializerMethodField(read_only=True)
-
     class Meta :
         model = ShippingAddress
-        fields = ['city','country','postalCode','address']
+        fields = "__all__"
 
  
+class OrderItemSerializer(serializers.ModelSerializer):
+
+    class Meta :
+        model = OrderItem
+        fields = "__all__" 
+
+class OrderSerializer(serializers.ModelSerializer):
+
+    order = serializers.SerializerMethodField(read_only=True) 
+    shippingAddress = serializers.SerializerMethodField(read_only=True) 
+    user = serializers.SerializerMethodField(read_only=True) 
+
+
+    class Meta :
+        model = Order
+        fields = "__all__" 
+
+    def get_order(self,obj):
+
+        item = obj.orderItem_set.all()    # OrderItem has "Fk" realtionship with "Order" model
+        serializer = OrderItemSerializer(item,many=True) 
+        return Response(serializer.data)
+
+    def get_shippingAddress(self,obj):
+
+        try :
+
+            # ShippiingAddress has "oneToOne" realtionship with "Order" model
+            address = ShippingAddressSerializer(obj.shippingAddress,many=False) 
+            
+        except : 
+            address = False
+
+        return address    
+
+    def get_order(self,obj):
+
+        user = obj.user  
+        serializer = UserSerializer(user,many=False) 
+        return Response(serializer.data)    
