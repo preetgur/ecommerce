@@ -26,8 +26,10 @@ const userInfoFromStorage = localStorage.getItem('userInfo') ? JSON.parse(localS
 
 const shippingAddressFromStorage = localStorage.getItem('shipping') ? JSON.parse(localStorage.getItem('shipping')) : null
 
+const paymentMethodFromStorage = localStorage.getItem('paymentMethod') ? JSON.parse(localStorage.getItem('paymentMethod')) : null
+
 console.log('Shipping adress from local ..', shippingAddressFromStorage);
-console.log('userinfo from local ..', userInfoFromStorage);
+console.log('userinfo from local ..', userInfoFromStorage,paymentMethodFromStorage);
 
 
 
@@ -44,7 +46,9 @@ const initialState = {
         shipping: shippingAddressFromStorage
     },
     
-
+    paymentMethod: {
+        method : paymentMethodFromStorage
+    }
 }
 
 const middleware = [thunk]

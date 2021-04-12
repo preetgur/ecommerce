@@ -9,6 +9,7 @@ import RegisterScreen from './screens/RegisterScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import ShippingScreen from './screens/ShippingScreen';
 import PaymentScreen from './screens/PaymentScreen';
+import PlaceOrderScreen from './screens/PlaceOrderScreen';
 
 
 function App() {
@@ -47,6 +48,11 @@ function App() {
 
           </Route>
 
+          <Route path="/palceOrder">
+            <Header />
+            <PlaceOrderScreen />
+
+          </Route>
           <Route path="/payment">
             <Header />
             <PaymentScreen />

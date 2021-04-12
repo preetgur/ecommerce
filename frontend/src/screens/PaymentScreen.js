@@ -27,7 +27,7 @@ function PaymentScreen() {
         e.preventDefault();
 
         dispatch(savePaymentMethod(paymentMethod))
-        history.push("/orderPlaced")
+        history.push("/palceOrder")
     }
 
     return (

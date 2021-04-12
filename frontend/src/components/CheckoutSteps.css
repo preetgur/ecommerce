@@ -4,8 +4,10 @@
     justify-content: space-evenly;
     /* border: 1px solid; */
     width: 60%;
-    margin: 10px 0;
-    padding: 10px;
+    margin: auto;
+ 
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 
