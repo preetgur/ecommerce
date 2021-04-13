@@ -3,6 +3,7 @@ import './Product.css'
 import Rating from './Rating'
 import { Link } from 'react-router-dom'
 
+
 function Product({product}) {
     return (
         <div className="product">

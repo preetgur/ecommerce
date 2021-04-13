@@ -80,7 +80,7 @@ def addOrderItem(request):
             )
 
             # update stock
-            product.countInStock -= orderItem.qty
+            product.countInStock -= int(orderItem.qty)
             product.save()
 
         serializer = OrderSerializer(order,many=False)
@@ -93,7 +93,6 @@ def addOrderItem(request):
 def getOrderById(request,pk):
 
     try :
-
         user  = request.user
         order = Order.objects.get(_id =pk)
 

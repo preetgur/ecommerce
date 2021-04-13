@@ -20,6 +20,8 @@ function ShippingScreen() {
 
     console.log('shipping add .. ',shippingAddr);
     
+    
+
     const shippingHandler = (e) => {
 
         e.preventDefault();

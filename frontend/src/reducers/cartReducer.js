@@ -31,7 +31,7 @@ function cartReducer(state=initialState,action) {
                 ...state,
                 cartItems: state.cartItems.filter( item => item.product !== action.payload) 
             }
-        
+            
         case CART_CLEAR:
             return {
                 ...state,

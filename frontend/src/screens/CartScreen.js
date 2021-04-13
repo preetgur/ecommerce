@@ -30,7 +30,7 @@ function CartScreen() {
     {
       
         dispatch(removeFromCart(id))
-        
+
     }
    
     const checkoutHandler = () => {

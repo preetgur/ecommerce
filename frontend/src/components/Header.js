@@ -10,7 +10,7 @@ function Header() {
     const { userInfo } = userLogin
     const dispatch = useDispatch()
     // const userInfo = JSON.parse(localStorage.getItem('userInfo'))
-
+    
     const logoutHandler = () => {
         dispatch(logout())
     }

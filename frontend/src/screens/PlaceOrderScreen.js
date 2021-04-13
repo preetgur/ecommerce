@@ -5,6 +5,7 @@ import { orderActions } from '../actions/orderActions'
 import CheckoutSteps from '../components/CheckoutSteps'
 import './PlaceOrderScreen.css'
 
+
 function PlaceOrderScreen() {
 
     const dispatch = useDispatch()
@@ -23,7 +24,7 @@ function PlaceOrderScreen() {
     const paymentMethod = useSelector(state => state.paymentMethod)
 
     // it remains for this page only. No reflection to our store
-    cart.itemsPrice = cartItems.reduce((acc, item) => acc += Number(item.price), 0).toFixed(2)
+    cart.itemsPrice = cartItems.reduce((acc, item) => acc += Number(item.price*item.qty ), 0).toFixed(2)
     
     cart.shippingPrice = Number((cart.itemsPrice > 500 ? 0 : 49).toFixed(2))
 

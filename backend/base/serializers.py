@@ -93,7 +93,7 @@ class OrderSerializer(serializers.ModelSerializer):
         try :
 
             # ShippiingAddress has "oneToOne" realtionship with "Order" model
-            address = ShippingAddressSerializer(obj.shippingsddress,many=False).data 
+            address = ShippingAddressSerializer(obj.shippingaddress,many=False).data 
             
         except : 
             address = False
@@ -102,6 +102,6 @@ class OrderSerializer(serializers.ModelSerializer):
 
     def get_user(self,obj):
 
-        user = obj.user  
+        user = obj.user     
         serializer = UserSerializer(user,many=False) 
         return serializer.data    

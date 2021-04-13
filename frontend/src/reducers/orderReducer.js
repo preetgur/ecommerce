@@ -1,9 +1,20 @@
-import { ORDER_CREATE_FAIL, ORDER_CREATE_REQUEST, ORDER_CREATE_SUCCESS, ORDER_CREATE_RESET, ORDER_GET_BY_ID_REQUEST, ORDER_GET_BY_ID_SUCCESS, ORDER_GET_BY_ID_FAIL } from "../constants/orderConstansts";
+import {
+    ORDER_CREATE_FAIL,
+    ORDER_CREATE_REQUEST,
+    ORDER_CREATE_SUCCESS,
+    ORDER_CREATE_RESET,
+
+
+    ORDER_DETAIL_FAIL,
+    ORDER_DETAIL_REQUEST,
+    ORDER_DETAIL_SUCCESS
+
+} from "../constants/orderConstansts";
 
 
 export const orderReducer = (state = {}, action) => {
     
-    console.log('action. paylod',action)
+    console.log('###### action. paylod order',action)
     
     switch (action.type) {
         case ORDER_CREATE_REQUEST:
@@ -25,21 +36,19 @@ export const orderReducer = (state = {}, action) => {
 }
 
 
+export const orderDetailReducer = (state = {}, action) => {
 
-export const orderByIdReducer = (state = {}, action) => {
-
-    console.log('orderbyid reducer .. ', action)
+    console.log('###### Detail Reducer ####', action)
 
     switch (action.type) {
-        case ORDER_GET_BY_ID_REQUEST:
+        case ORDER_DETAIL_REQUEST:
             return { loading: true }
 
-        case ORDER_GET_BY_ID_SUCCESS:
-            return { loading: false, success: true, orderById: action.payload }
+        case ORDER_DETAIL_SUCCESS:
+            return { loading: false, success: true, order: action.payload }
 
-        case ORDER_GET_BY_ID_FAIL:
+        case ORDER_DETAIL_FAIL:
             return { loading: false, error: action.payload }
-
 
         default:
             return state

@@ -6,7 +6,11 @@ import {
     
     ORDER_GET_BY_ID_REQUEST,
     ORDER_GET_BY_ID_SUCCESS,
-    ORDER_GET_BY_ID_FAIL
+    ORDER_GET_BY_ID_FAIL,
+
+    ORDER_DETAIL_FAIL,
+    ORDER_DETAIL_REQUEST,
+    ORDER_DETAIL_SUCCESS
 
 
 } from "../constants/orderConstansts"
@@ -60,40 +64,44 @@ export const orderActions = (order) => async(dispatch,getState) => {
     }
 }
 
-export const orderById = (id) => async (dispatch,getState) => {
 
 
+export const getOrderDetails = (id) => async (dispatch, getState) => {
     try {
-        console.log('orderby id ..', id);
-
         dispatch({
-            type: ORDER_GET_BY_ID_REQUEST
+            type: ORDER_DETAIL_REQUEST
         })
 
-        const { userLogin: { userInfo } } = getState()
+        const {
+            userLogin: { userInfo },
+        } = getState()
 
         const config = {
             headers: {
-                "Content-type": "application/json",
-                Authorization: `Bearer ${userInfo.token}`,
+                'Content-type': 'application/json',
+                Authorization: `Bearer ${userInfo.token}`
             }
         }
 
+        //Imp: if we not use "/" infront of api then our url will be http://localhost:3000/order/api/orders/34/ that's why we got error previosuly. It waste my 4 hrs
 
-        const { data } = await axios.get(`api/orders/${id}`,config)
+        const { data } = await axios.get(
+            `/api/orders/${id}/`,
+            config
+        )
 
         dispatch({
-            type: ORDER_GET_BY_ID_SUCCESS,
+            type: ORDER_DETAIL_SUCCESS,
             payload: data
         })
 
 
-
     } catch (error) {
         dispatch({
-            type: ORDER_GET_BY_ID_FAIL,
-            payload: error.response && error.response.data.detail ? error.response.data.detail : error.message
+            type: ORDER_DETAIL_FAIL,
+            payload: error.response && error.response.data.detail
+                ? error.response.data.detail
+                : error.message,
         })
-
     }
 }
