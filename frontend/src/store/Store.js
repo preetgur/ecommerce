@@ -6,7 +6,7 @@ import cartReducer, { savePaymentMethodReducer, saveShipingAddressReducer } from
 import { userLoginReducer } from '../reducers/userLoginReducer'
 import { userRegisterReducer } from '../reducers/userRegisterReducer'
 import { userProfileReducer, userUpdateProfileReducer } from '../reducers/userProfileReducer'
-import {  orderDetailReducer, orderReducer } from '../reducers/orderReducer'
+import {  orderDetailReducer, orderPayReducer, orderReducer } from '../reducers/orderReducer'
 
 
 const reducer = combineReducers({
@@ -20,7 +20,8 @@ const reducer = combineReducers({
     shippingAddress: saveShipingAddressReducer,
     paymentMethod: savePaymentMethodReducer,
     order: orderReducer,
-    orderDetail : orderDetailReducer
+    orderDetail: orderDetailReducer,
+    orderPay : orderPayReducer
 
 })
 

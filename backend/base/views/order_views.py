@@ -112,10 +112,10 @@ def getOrderById(request,pk):
 @permission_classes([IsAuthenticated])
 def updateOrderToPaid(request,pk):
 
-    order = Order.objects.get(id = pk)
+    order = Order.objects.get(_id = pk)
 
     order.isPaid = True
     order.paidAt = datetime.now()
     order.save()
 
-    return Response("Order Paid status ")
+    return Response("Order was Paid ")

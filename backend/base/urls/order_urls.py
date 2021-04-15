@@ -8,5 +8,4 @@ urlpatterns = [
     path("<str:pk>/",view.getOrderById,name="get-order-by-id") ,
     path("<str:pk>/pay/",view.updateOrderToPaid,name="update-order-to-paid") ,
 
-
 ]
