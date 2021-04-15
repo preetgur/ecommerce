@@ -46,13 +46,19 @@ function OrderScreen() {
                                 <h5>Your Order No : {order?._id }</h5>
                         
                         <h1>Shipping</h1>
-                        <p>Name : { order?.user.name}</p>
-                    shipping : {order?.shippingAddress.address}, {order?.shippingAddress.city} {order?.shippingAddress.postalCode},{order?.shippingAddress.country} {"( landmark : " + order?.shippingAddress.landmark + " )"}  
+                                <p>Name : {order?.user.name}</p>
+                                <p>Email : <a href={`mailto:${order.user.email}`}>{order?.user.email}</a> </p>
+                    shipping : {order?.shippingAddress.address}, {order?.shippingAddress.city} {order?.shippingAddress.postalCode},{order?.shippingAddress.country} {"( landmark : " + order?.shippingAddress.landmark + " )"}
+
+                                <p> Status : {order?.isDelivered ? `Delivered on ${order.deliveredAt}` : "Pending"} </p>
+
                     </div>
 
                     <div className="placeOrderScreen__paymentMethod">
                         <h1>Payment Method</h1>
                     Method :  {order?.paymentMethod}
+
+                    <p> Status : {order?.isPaid ? `Paid on ${order.paidAt}` : "Pending"} </p>
                     </div>
 
                     <div className="placeOrderScreen__cart">
@@ -62,6 +68,7 @@ function OrderScreen() {
                             order?.order.map(item => {
                                 return <div className="placeOrderScreen__cart__items">
                                 
+                            
                                 <img src={item.image} alt={item.name} width="100px" className="placeOrderScreen__cart__items__image" />
 
                                 <Link to={`/product/${item.product}`} className="placeOrderScreen__cart__items__name"> {item.name}</Link>

@@ -90,6 +90,8 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
             config
         )
 
+        console.log('image dat',data);
+        
         dispatch({
             type: ORDER_DETAIL_SUCCESS,
             payload: data
