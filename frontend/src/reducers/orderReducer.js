@@ -13,6 +13,11 @@ import {
     ORDER_PAY_SUCCESS,
     ORDER_PAY_FAIL,
     ORDER_PAY_RESET,
+    
+    MY_ORDER_REQUEST,
+    MY_ORDER_SUCCESS,
+    MY_ORDER_FAIL,
+    MY_ORDER_RESET,
 
 
 } from "../constants/orderConstansts";
@@ -85,3 +90,27 @@ export const orderPayReducer = (state = {}, action) => {
     }
 }
 
+
+
+export const myOrderReducer = (state = {}, action) => {
+
+    console.log('###### my order', action)
+
+    switch (action.type) {
+        case MY_ORDER_REQUEST:
+            return { loading: true }
+
+        case MY_ORDER_SUCCESS:
+            return { loading: false, success: true, order: action.payload }
+
+        case MY_ORDER_FAIL:
+            return { loading: false, error: action.payload }
+
+
+        case MY_ORDER_RESET:
+            return { loading: false, order: {} }
+
+        default:
+            return state
+    }
+}

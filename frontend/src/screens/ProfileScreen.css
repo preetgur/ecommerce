@@ -1,0 +1,57 @@
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.profileScreen__container
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 20px 20px;
+}
+
+.profileScreen__First
+{
+    flex: .5;
+}
+
+.profileScreen__second
+{
+    flex: 1;
+}
+
+.profileScreen__btn{
+        padding: 8px;
+    background: black;
+    color: white;
+    border: none;
+    border-radius: 2px;
+    display: block;
+    margin: auto;
+}
+
+.profileScreen__form{
+
+        display: flex;
+    flex-direction: column;
+    border: 1px solid;
+    height: 300px;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+
+.profileScreen__email,.profileScreen__name, .profileScreen__password{
+    display: flex;
+}

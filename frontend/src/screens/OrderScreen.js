@@ -53,7 +53,7 @@ function OrderScreen() {
                 }
         }
 
-    }, [params.id])
+    }, [params.id,successPay])
 
 
     const successPaymentHandler = (paymentResult) => {
@@ -84,7 +84,13 @@ function OrderScreen() {
                         <h1>Shipping</h1>
                                 <p>Name : {order?.user?.name}</p>
                                 <p>Email : <a href={`mailto:${order?.user?.email}`}>{order?.user.email}</a> </p>
-                    shipping : {order?.shippingAddress.address}, {order?.shippingAddress.city} {order?.shippingAddress.postalCode},{order?.shippingAddress.country} {"( landmark : " + order?.shippingAddress.landmark + " )"}
+                        shipping :
+                                {order?.shippingAddress.address},
+                                {order?.shippingAddress.city}
+                                {order?.shippingAddress.postalCode},
+                                {order?.shippingAddress.country}
+
+                                { order?.shippingAddress.landmark && "( landmark : " + order?.shippingAddress.landmark + " )"}
 
                                 <p> Status : {order?.isDelivered ? `Delivered on ${order.deliveredAt}` : "Pending"} </p>
 
