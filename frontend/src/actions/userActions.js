@@ -17,6 +17,11 @@ import {
     USER_UPDATE_PROFILE_SUCCESS,
     USER_UPDATE_PROFILE_FAIL,
 
+    USER_LIST_REQUEST,
+    USER_LIST_SUCCESS,
+    USER_LIST_FAIL,
+    USER_LIST_RESET,
+
 
 } from '../constants/userConstants'
 import axios from 'axios'
@@ -68,6 +73,9 @@ export const logout = () => async(dispatch) => {
         type : USER_LOGOUT
     })
 
+    dispatch({
+        type : USER_LIST_RESET
+    })
     // dispatch({
     //     type : USER_PROFILE_RESET
     // })
@@ -218,4 +226,49 @@ export const userUpdateProfile = (email,name,password) => async(dispatch,getStat
 
     }
     
+}
+
+
+export const userList = () => async (dispatch, getState) => {
+
+    try {
+
+        dispatch({
+            type: USER_LIST_REQUEST
+        })
+
+        // get the user from state
+        // why use getstate() instead of useSelector : becasue useSelector in hook which should be used in components
+        const {
+            userLogin: { userInfo }
+        } = getState()
+
+        const config = {
+            headers: {
+                "Content-type": "application/json",
+                Authorization: `Bearer ${userInfo.token}`,
+            }
+        }
+
+
+
+        const { data } = await axios.get("/api/users/",config)
+        console.log('data.. ', data);
+
+
+        dispatch({
+            type: USER_LIST_SUCCESS,
+            payload: data
+        })
+
+    }
+
+    catch (error) {
+        dispatch({
+            type: USER_LIST_FAIL,
+            payload: error.response && error.response.data.detail ? error.response.data.detail : error.message
+        })
+
+    }
+
 }

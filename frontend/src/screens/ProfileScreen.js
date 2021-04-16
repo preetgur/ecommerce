@@ -130,12 +130,18 @@ function ProfileScreen() {
                         </tr>
                       
                             {order?.map((item) => (
-                                <tr>
+                                <tr key={item._id}> 
                                     <td>{item._id}</td>
                                     <td>{item.createdAt.substring(0,10)}</td>
                                     <td>{item.totalPrice}</td>
                                     <td>{item.isPaid ? item.paidAt.substring(0, 10) : "Pending"}</td>
-                                    <td>{item.isDelivered ? item.deliveredAt.substring(0, 10) : <Link to={`order/${item._id}`}> <input type="Button" value="Details" className="profileScreen__btn"/> </Link> }</td>
+
+                                    <td>{item.isDelivered ?
+                                        item.deliveredAt.substring(0, 10) :
+                                        <Link to={`order/${item._id}`}>
+                                        
+                                            <p className="profileScreen__btn" >Details</p>
+                                        </Link>}</td>
 
 
 

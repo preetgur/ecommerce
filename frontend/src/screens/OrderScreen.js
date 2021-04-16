@@ -108,7 +108,7 @@ function OrderScreen() {
 
                         {
                             order?.order.map(item => {
-                                return <div className="placeOrderScreen__cart__items">
+                                return <div key={item._id} className="placeOrderScreen__cart__items">
                                 
                             
                                 <img src={item.image} alt={item.name} width="100px" className="placeOrderScreen__cart__items__image" />
