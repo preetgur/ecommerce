@@ -12,6 +12,7 @@ import PaymentScreen from './screens/PaymentScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
 import UserListScreen from './screens/UserListScreen';
+import UserEditScreen from './screens/UserEditScreen';
 
 
 function App() {
@@ -50,7 +51,12 @@ function App() {
           </Route>
           <Route path="/admin/userlist">
           <Header /> 
-          <UserListScreen />
+            <UserListScreen />
+            
+          </Route>
+          <Route path="/admin/user/:id">
+            <Header />
+            <UserEditScreen />
 
           </Route>
 

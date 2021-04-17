@@ -37,7 +37,8 @@ function ProfileScreen() {
         }
 
         else {
-            if (!user || !user.username || success) {
+            if (!user || !user.username || success || userInfo._id !== user._id) {
+
                 dispatch({
                     type : USER_UPDATE_PROFILE_RESET
                 })

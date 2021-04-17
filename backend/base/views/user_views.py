@@ -103,6 +103,9 @@ def updateUserProfile(request):
     return Response(serialzer.data)
 
 
+
+## ADMIN's ACTION
+
 @api_view(['DELETE'])
 @permission_classes([IsAdminUser])
 def deleteUser(request,pk):
@@ -114,3 +117,34 @@ def deleteUser(request,pk):
         return Response("User was deleted")
 
     return Response("some error occured")
+
+
+
+
+@api_view(['GET'])
+@permission_classes([IsAdminUser])
+def getUserByAdmin(request,pk):
+
+    user = User.objects.get(id=pk)
+    serialzer = UserSerializer(user,many=False) 
+
+    return Response(serialzer.data)
+
+@api_view(['PUT'])
+@permission_classes([IsAdminUser])
+def updateUserAdmin(request,pk):
+
+    user = User.objects.get(id=pk)
+
+    data = request.data
+
+    print('data .. ',data)
+    user.first_name = data['name']
+    user.username = data['email']
+    user.email = data['email']
+    user.is_staff = data['isAdmin']
+
+    user.save()
+    serialzer = UserSerializer(user,many=False) 
+
+    return Response(serialzer.data)
