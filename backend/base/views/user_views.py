@@ -101,3 +101,16 @@ def updateUserProfile(request):
 
     user.save()
     return Response(serialzer.data)
+
+
+@api_view(['DELETE'])
+@permission_classes([IsAdminUser])
+def deleteUser(request,pk):
+
+    user = User.objects.get(id = pk)
+
+    if user:
+        user.delete()
+        return Response("User was deleted")
+
+    return Response("some error occured")
