@@ -60,7 +60,8 @@ function Header() {
                     {userInfo && userInfo.isAdmin && (<div class="dropdown">
                         <button class="dropbtn">Admin</button>
                         <div class="dropdown-content">
-                            <a href={"/admin/userlist"}>User</a>
+                            <a href={"/admin/userlist"}>users</a>
+                            <a href={"/admin/productlist"}>Products</a>
                         </div>
                     </div>)}
 

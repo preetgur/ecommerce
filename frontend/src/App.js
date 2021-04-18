@@ -13,6 +13,8 @@ import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
 import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
+import ProductListScreen from './screens/ProductListScreen';
+import ProductEditScreen from './screens/ProductEditScreen';
 
 
 function App() {
@@ -54,9 +56,23 @@ function App() {
             <UserListScreen />
             
           </Route>
+
+
           <Route path="/admin/user/:id">
             <Header />
             <UserEditScreen />
+
+          </Route>
+
+          <Route path="/admin/productlist">
+            <Header />
+            <ProductListScreen />
+
+          </Route>
+
+          <Route path="/admin/product/:id">
+            <Header />
+            <ProductEditScreen />
 
           </Route>
 

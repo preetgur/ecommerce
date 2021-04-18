@@ -34,3 +34,65 @@ def getProduct(request,pk):
     #        break
    
     return Response(serialzer.data)    
+
+
+@api_view(['DELETE'])
+@permission_classes([IsAdminUser])
+def deleteProduct(request,pk):
+    product = Product.objects.get(_id =pk)
+    product.delete()
+
+    return Response("Product was Deleted")
+
+
+@api_view(['PUT'])
+@permission_classes([IsAdminUser])
+def updateProduct(request,pk):
+
+    data = request.data
+    print("update product ..",data)
+    product = Product.objects.get(_id =pk)
+    
+    product.name = data['name']
+    product.price = data['price']
+    product.category = data['category']
+    product.brand = data['brand']
+    product.countInStock = data['countInStock']
+    product.description = data['description']
+
+    product.save()  # save before serialize the data 
+    serializer = ProductSerializer(product,many=False)
+  
+    return Response(serializer.data)
+
+
+
+@api_view(['POST'])
+@permission_classes([IsAdminUser])
+def createProduct(request,pk):
+
+    try :
+        data = request.data
+        print("create product ..",data)
+        product = Prodcut.objects.create(
+            user = request.user,
+            name=data['name'],
+            price = data['price'],
+            category = data['category'],
+            brand = data['category'],
+            countInStock = data['countInStock'],
+            description = data['description'],
+            numReviews = data['reviews'],
+            rating = data['rating'],   
+        )
+
+        product.save()  # save before serialize the data 
+        serializer = ProductSerializer(product,many=False)
+        return Response(serializer.data)
+
+    except:
+        return Response("some error ocuured")    
+
+
+
+
