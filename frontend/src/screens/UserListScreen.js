@@ -23,7 +23,7 @@ function UserListScreen() {
 
         if (userInfo && userInfo.isAdmin) {
 
-            dispatch(userListAction())
+            dispatch(userListAction()) 
         }
         else {
             history.push('/login')

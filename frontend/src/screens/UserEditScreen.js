@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useLocation, useParams } from 'react-router'
 import { Link } from 'react-router-dom'
-import { getUserAdmin, updateUserAdmin, userRegister } from '../actions/userActions'
+import { getUserAdmin, updateUserAdmin, userList, userRegister } from '../actions/userActions'
 import { USER_UPDATE_ADMIN_RESET } from '../constants/userConstants'
 import './RegisterScreen.css'
 
@@ -28,12 +28,14 @@ function UserEditScreen() {
 
         if (success) {
             dispatch({ type: USER_UPDATE_ADMIN_RESET })
+            // dispatch(userList())
+        
             history.push('/admin/userlist/')
             
         }
 
         else {
-            if (!user || user.id !== Number(params.id)) {
+            if (!user || user.id !== Number(params.id) ) {
 
                 dispatch(getUserAdmin(params.id))
             }
@@ -47,7 +49,7 @@ function UserEditScreen() {
         }
        
 
-    }, [params.id,user])
+    }, [params.id,user,history,success])
 
     const userUpdateHandler = (e) => {
         e.preventDefault();
@@ -60,8 +62,11 @@ function UserEditScreen() {
             id : params.id
         }))
         
+        dispatch(getUserAdmin(params.id))
+
   
         setMessage("User is Updated")
+
     }
     return (
         <div className="loginScreen">
