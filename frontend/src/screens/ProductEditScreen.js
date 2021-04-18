@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useLocation, useParams } from 'react-router'
@@ -20,6 +21,10 @@ function ProductEditScreen() {
     
     const [countInStock, setCountInStock] = useState(0)
     const [description , setDescription] = useState("")
+
+    const [image , setImage] = useState("")
+    const [uploading, setUploading] = useState(false)
+
 
     const [message, setMessage] = useState("")
 
@@ -50,6 +55,8 @@ function ProductEditScreen() {
 
                 setCountInStock(product.countInStock)
                 setDescription(product.description)
+                setImage(product.image)
+
             }
         }
     }, [params.id, history,dispatch,product._id,success])
@@ -73,6 +80,41 @@ function ProductEditScreen() {
 
         // setMessage("Product is Updated")
 
+    }
+
+    const uploadFileHandler = async(e) => {
+        
+        console.log('Image uploaded', e.target.files[0])
+        const file = e.target.files[0]
+        const formData = new FormData()
+
+        formData.append('image', file)
+        formData.append('product_id',params.id)
+
+        setUploading(true)
+
+        console.log('form data .. ',formData);
+        
+        try {
+            
+            const config = {
+                headers: {
+                    
+                'Content-Type' :'multipart/form-data'
+                }
+            }
+
+            const { data } = await axios.post('/api/products/upload/', formData, config)
+            
+            console.log('setimage data ..',data);
+            
+            setUploading(true)
+            setImage(data)
+
+        } catch (error) {
+            
+            setUploading(false) 
+        }
     }
     return (
         <div className="loginScreen">
@@ -121,6 +163,16 @@ function ProductEditScreen() {
                         <div className="loginScreen__email">
                             <label htmlFor="name"> <small>Description </small> </label>
                             <input type="text" placeholder="Enter Description" value={description} onChange={e => setDescription(e.target.value)} />
+                        </div>
+
+                        
+                        <div className="loginScreen__email">
+                            <label htmlFor="name"> <small>Image </small> </label>
+                            <input type="text" placeholder="Enter Description" value={image} onChange={e => setImage(e.target.value)} />
+                        </div>
+
+                        <div>
+                            <input type="file" onChange={uploadFileHandler}/>
                         </div>
 
 
