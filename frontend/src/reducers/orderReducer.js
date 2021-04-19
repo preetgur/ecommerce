@@ -18,6 +18,9 @@ import {
     MY_ORDER_SUCCESS,
     MY_ORDER_FAIL,
     MY_ORDER_RESET,
+    ORDER_LIST_ADMIN_REQUEST,
+    ORDER_LIST_ADMIN_SUCCESS,
+    ORDER_LIST_ADMIN_FAIL,
 
 
 } from "../constants/orderConstansts";
@@ -109,6 +112,28 @@ export const myOrderReducer = (state = {}, action) => {
 
         case MY_ORDER_RESET:
             return { loading: false, order: {} }
+
+        default:
+            return state
+    }
+}
+
+
+
+export const orderListReducer = (state = {}, action) => {
+
+    console.log('###### Admin order List action', action)
+
+    switch (action.type) {
+        case ORDER_LIST_ADMIN_REQUEST:
+            return { loading: true }
+
+        case ORDER_LIST_ADMIN_SUCCESS:
+            return { loading: false, success: true, orders: action.payload }
+
+        case ORDER_LIST_ADMIN_FAIL:
+            return { loading: false, error: action.payload }
+
 
         default:
             return state

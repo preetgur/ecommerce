@@ -15,6 +15,8 @@ import UserListScreen from './screens/UserListScreen';
 import UserEditScreen from './screens/UserEditScreen';
 import ProductListScreen from './screens/ProductListScreen';
 import ProductEditScreen from './screens/ProductEditScreen';
+import OrderListScreen from './screens/OrderListScreen';
+
 
 
 function App() {
@@ -64,12 +66,20 @@ function App() {
 
           </Route>
 
+
+          <Route path="/admin/orderlist">
+            <Header />
+            <OrderListScreen />
+
+          </Route>
+
           <Route path="/admin/productlist">
             <Header />
             <ProductListScreen />
 
           </Route>
 
+          
           <Route path="/admin/product/:id">
             <Header />
             <ProductEditScreen />

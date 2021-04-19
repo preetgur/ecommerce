@@ -62,6 +62,7 @@ function Header() {
                         <div class="dropdown-content">
                             <a href={"/admin/userlist"}>users</a>
                             <a href={"/admin/productlist"}>Products</a>
+                            <a href={"/admin/orderlist"}>Orders</a>
                         </div>
                     </div>)}
 

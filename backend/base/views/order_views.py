@@ -130,3 +130,14 @@ def getMyOrders(request):
     serializer = OrderSerializer(order,many=True)
 
     return Response(serializer.data)
+
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def getOrders(request):
+
+    order = Order.objects.all()
+    serializer = OrderSerializer(order,many=True)
+
+    return Response(serializer.data)

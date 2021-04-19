@@ -6,7 +6,7 @@ import cartReducer, { savePaymentMethodReducer, saveShipingAddressReducer } from
 import { userLoginReducer } from '../reducers/userLoginReducer'
 import { userRegisterReducer } from '../reducers/userRegisterReducer'
 import { userProfileReducer, userUpdateProfileReducer } from '../reducers/userProfileReducer'
-import {  myOrderReducer, orderDetailReducer, orderPayReducer, orderReducer } from '../reducers/orderReducer'
+import {  myOrderReducer, orderDetailReducer, orderListReducer, orderPayReducer, orderReducer } from '../reducers/orderReducer'
 import {userListReducer} from '../reducers/userListReducer'
 import { deleteUserReducer } from '../reducers/deleteUserReducer'
 import { userUpdateAdminReducer, userGetAdminReducer} from '../reducers/userUpdateAdminReducer'
@@ -27,10 +27,13 @@ const reducer = combineReducers({
     userUpdateProfile: userUpdateProfileReducer,
     shippingAddress: saveShipingAddressReducer,
     paymentMethod: savePaymentMethodReducer,
+
     order: orderReducer,
     orderDetail: orderDetailReducer,
     orderPay: orderPayReducer,
     myOrder: myOrderReducer,
+    orderList: orderListReducer,
+
     userList: userListReducer,
     deleteUser: deleteUserReducer,
     userUpdateAdmin: userUpdateAdminReducer,

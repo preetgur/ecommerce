@@ -3,6 +3,9 @@ from base.views import order_views as view
 
 
 urlpatterns = [
+
+    path('',view.getOrders,name="get-orders"),
+
     path('shipping',view.shipping,name="shipping"),
     path('addorderItem',view.addOrderItem,name="add-order-item") ,
     path('myorders',view.getMyOrders,name="get-my-orders") ,
