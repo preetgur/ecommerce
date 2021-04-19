@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
-import { getOrderDetails, payOrder} from '../actions/orderActions'
+import { getOrderDetails, orderToDelivered, payOrder} from '../actions/orderActions'
 import './PlaceOrderScreen.css'
 import { PayPalButton } from 'react-paypal-button-v2'
 import { ORDER_PAY_RESET } from '../constants/orderConstansts'
@@ -14,8 +14,14 @@ function OrderScreen() {
     const params = useParams()
     
 
+    const userLogin = useSelector(state => state.userLogin)
+    const { userInfo } = userLogin
+
     const orderDetail = useSelector(state => state.orderDetail)
     const { loading, error, order } = orderDetail
+
+    const orderToDeli= useSelector(state => state.orderToDelivered)
+    const { loading:loadingDelivered, error:errorDelivered, order:orderDelivered ,success:successDelivered } = orderToDeli
 
     const orderPay = useSelector(state => state.orderPay)
     const { loading: loadingPay, success: successPay } = orderPay // rename values
@@ -53,7 +59,7 @@ function OrderScreen() {
                 }
         }
 
-    }, [params.id,successPay])
+    }, [params.id, successPay, successDelivered])
 
 
     const successPaymentHandler = (paymentResult) => {
@@ -65,6 +71,12 @@ function OrderScreen() {
 
         // it remains for this page only. No reflection to our store
         order.itemsPrice = order?.order.reduce((acc, item) => acc += Number(item.price * item.qty), 0).toFixed(2)
+    }
+
+    const orderDeliveredHandler = () => {
+
+        console.log('Order was deliverd');
+        dispatch(orderToDelivered(params.id))
     }
 
     return loading ? <h1>Loading home... </h1> :
@@ -170,6 +182,12 @@ function OrderScreen() {
                         }    
                     </div> 
 
+                            <div className="orderScreen__delivered">
+
+                                {userInfo && userInfo.isAdmin && order?.isPaid && !order.isDelivered && (
+                                    <button onClick={orderDeliveredHandler}>Mark As Delivered</button>
+                                )}
+                            </div>
                 </div>
 
             </div>

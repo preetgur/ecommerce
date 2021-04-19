@@ -21,6 +21,9 @@ import {
     ORDER_LIST_ADMIN_REQUEST,
     ORDER_LIST_ADMIN_SUCCESS,
     ORDER_LIST_ADMIN_FAIL,
+    ORDER_TO_DELIVERED_REQUEST,
+    ORDER_TO_DELIVERED_SUCCESS,
+    ORDER_TO_DELIVERED_FAIL,
 
 
 } from "../constants/orderConstansts";
@@ -134,6 +137,28 @@ export const orderListReducer = (state = {}, action) => {
         case ORDER_LIST_ADMIN_FAIL:
             return { loading: false, error: action.payload }
 
+
+        default:
+            return state
+    }
+}
+
+
+
+export const orderToDeliveredReducer = (state = {}, action) => {
+
+    console.log('###### Order to Delivered Action', action)
+
+    switch (action.type) {
+        case ORDER_TO_DELIVERED_REQUEST:
+            return { loading: true }
+
+        case ORDER_TO_DELIVERED_SUCCESS:
+            return { loading: false, success: true, orders: action.payload }
+
+        case ORDER_TO_DELIVERED_FAIL:
+            return { loading: false, error: action.payload }
+        
 
         default:
             return state

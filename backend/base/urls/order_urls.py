@@ -13,5 +13,7 @@ urlpatterns = [
     # dynamic url should be at the bottom otherwise it may give error
     path("<str:pk>/",view.getOrderById,name="get-order-by-id") ,
     path("<str:pk>/pay/",view.updateOrderToPaid,name="update-order-to-paid") ,
+    path("<str:pk>/delivered/",view.updateOrderToDelivered,name="update-order-to-delivered") ,
+
 
 ]
