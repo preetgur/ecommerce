@@ -42,7 +42,7 @@ function ProfileScreen() {
                 dispatch({
                     type : USER_UPDATE_PROFILE_RESET
                 })
-                dispatch((userProfile('profile')))
+                dispatch((userProfile(userInfo._id)))
                 dispatch(myOrder())
             }
             else {

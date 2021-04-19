@@ -94,7 +94,7 @@ def createProduct(request,pk):
         return Response("some error ocuured")    
 
 
-
+# update the product image
 @api_view(['POST'])
 def uploadImage(request):
 

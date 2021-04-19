@@ -159,7 +159,7 @@ export const userProfile = (id) => async(dispatch,getState) =>{
             } 
         }
         const { data } = await axios.get(`api/users/${id}`, config)
-        // console.log('data.. ',data);
+        console.log('data.. ',data);
         
 
         dispatch({
