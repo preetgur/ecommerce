@@ -1,0 +1,8 @@
+.searchBox{
+    display: flex;
+    align-items: center;
+}
+
+.searchBox__input,.searchBox__btn{
+    padding : 10px;
+}

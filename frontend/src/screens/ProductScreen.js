@@ -111,7 +111,7 @@ function ProductScreen() {
                                 {product.reviews.length == 0 && <p>No Review Yet. Be The First One.</p>}
 
                             {product.reviews.map(review => (
-                                <div className="productScreen__review__detail"> 
+                                <div className="productScreen__review__detail" key={review._id}> 
                                 <h5>{review.name}</h5>
                                     
                                     <p>{review.comment}</p>

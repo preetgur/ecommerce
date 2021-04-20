@@ -18,12 +18,18 @@ import {
 
 import axios from 'axios'
 
-export const listProduct = () => async(dispatch) => {
+export const listProduct = (keyword="") => async(dispatch) => {
     try {
         
         dispatch({ type: PRODUCT_LIST_REQUEST })
         
-        const { data } = await axios.get('/api/products/')
+        // make the urls as "queryparms" by using keyword => ?keyword=airpods
+        // # ? defines the get request
+        const dat = await axios.get(`/api/products/${keyword}`)
+        console.log('list pro... ', dat);
+
+        const {data} = dat
+        
         dispatch({
             type: PRODUCT_LIST_SUCCESS,
             payload : data

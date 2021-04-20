@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { logout } from '../actions/userActions'
 import './Header.css'
+import SearchBox from './SearchBox'
 
 function Header() {
 
@@ -27,6 +28,9 @@ function Header() {
                 proshop
 
             </Link>
+
+            <SearchBox/>
+
             <div className="header__options">
                 <div className="header__options__one">
                     <Link to="/cart">

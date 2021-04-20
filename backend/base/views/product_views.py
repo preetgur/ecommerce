@@ -15,7 +15,14 @@ from rest_framework import status
 
 @api_view(['GET'])
 def getProducts(request):
-    products = Product.objects.all()
+
+    query = request.query_params.get('keyword')
+    print("query ### ",query)
+    if query == None:
+        query = ""
+
+    # if the query is empty the filter showcase all the data
+    products = Product.objects.filter(name__icontains=query)
     serialzer = ProductSerializer(products,many=True) 
 
    

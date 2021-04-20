@@ -5,6 +5,7 @@ import './HomeScreen.css'
 import axios from "axios"
 import { listProduct } from '../actions/productActions'
 import { useDispatch, useSelector } from 'react-redux'
+import { useHistory, useLocation } from 'react-router'
 
 
 function HomeScreen() {
@@ -15,12 +16,16 @@ function HomeScreen() {
     const productList = useSelector(state => state.productList)
     const {products,loading,error } =  productList
     //productList is reducer
-
+    const location = useLocation()
+    console.log('loaction ... ',location);
+    const keyword = location.search
+    
     useEffect(() => {
+        
+        console.log('Dis ..',keyword); // get the location search 
+        dispatch(listProduct(keyword))
      
-        dispatch(listProduct())
-     
-    }, [dispatch])
+    }, [dispatch,keyword])
 
     return (
         <div className="homeScreen">
