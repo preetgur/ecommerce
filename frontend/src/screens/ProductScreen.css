@@ -102,3 +102,40 @@
     align-items: center;
     justify-content: space-between;
 }
+
+.productScreen__review{
+        display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-family: monospace;
+    /* border: 1px solid; */
+    margin : 20px 0;
+}
+
+.productScreen__review__first{
+    flex:1;
+    margin-top: 20px;
+
+}
+
+.productScreen__review__second{
+    flex:1;
+}
+.productScreen__review__detail {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+    line-height: 20px;
+    font-family: monospace;
+    align-items: flex-start;
+    border-bottom: 2px solid lightgray;
+   padding : 10px 0;
+}
+
+.productScreen__write__review{
+        display: flex;
+    flex-direction: column;
+    line-height: 30px;
+    padding: 20px;
+    font-family: monospace;
+}

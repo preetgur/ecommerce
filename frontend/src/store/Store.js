@@ -12,6 +12,7 @@ import { deleteUserReducer } from '../reducers/deleteUserReducer'
 import { userUpdateAdminReducer, userGetAdminReducer} from '../reducers/userUpdateAdminReducer'
 import { deleteProductReducer } from '../reducers/deleteProductReducer'
 import { updateProductReducer } from '../reducers/updateProductReducer'
+import { createReviewReducer } from '../reducers/createReviewReducer'
 
 
 const reducer = combineReducers({
@@ -38,7 +39,9 @@ const reducer = combineReducers({
     userList: userListReducer,
     deleteUser: deleteUserReducer,
     userUpdateAdmin: userUpdateAdminReducer,
-    userGetAdmin: userGetAdminReducer
+    userGetAdmin: userGetAdminReducer,
+
+    reviewReducer: createReviewReducer
 
 })
 

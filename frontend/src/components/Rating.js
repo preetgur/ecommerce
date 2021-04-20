@@ -30,7 +30,7 @@ function Rating({value,no_of_reviews}) {
                 <i className={value >= 5 ? "fas fa-star" : value >= 4.5 ? "fas fa-star-half-alt" : "far fa-star"} ></i>
             </span>
             
-            <span> { no_of_reviews && no_of_reviews}</span>
+            <span> { no_of_reviews && no_of_reviews} </span>
         </div>
     )
 }
