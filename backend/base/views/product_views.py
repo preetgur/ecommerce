@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from django.contrib.auth.models import User
 from rest_framework.response import Response
 from base.serializers import ProductSerializer, UserSerializer,UserSerializerWithToken
-from base.models import Product
+from base.models import Product,Reviews
 # Create your views here.
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -106,3 +106,51 @@ def uploadImage(request):
     product.save()
 
     return Response("Image was uploaded")
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated] )
+def createProductReview(request,pk):
+
+    user = request.user
+    data = request.data
+
+    product = Product.objects.get(_id=pk)
+    print("product #### ",product)
+    # If review is already exits by user
+
+    alreadyExists = product.reviews_set.filter(user = user).exists()
+    print("review already #### ",alreadyExists)
+    if alreadyExists :
+        content = {"details" : "Review already exists"}
+        return Response(content,status= status.HTTP_400_BAD_REQUEST)
+
+    # if  no rating  or 0    
+    
+    elif data['rating'] == 0 :
+        content = {"details" : "Please select the rating for product"}
+        return Response(content,status= status.HTTP_400_BAD_REQUEST)
+
+    # create review
+
+    else :
+        review = Reviews.objects.create( 
+            user = user,
+            product = product,
+            rating = data['rating'],
+            name = user.first_name,
+            comment = data['comment']
+        )    
+
+        total_reviews = product.reviews_set.all()
+        product.numReviews = len(total_reviews)
+
+        total_rating = 0
+
+        for i in total_reviews:
+            total_rating += i.rating
+
+        product.rating  = total_rating / len(total_reviews)
+        product.save()
+
+        return Response("Review Added")    

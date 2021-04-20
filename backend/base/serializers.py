@@ -4,12 +4,24 @@ from django.contrib.auth.models import User
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.response import Response 
 
+class ReviewSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Reviews
+        fields = '__all__'
+
+
 class ProductSerializer(serializers.ModelSerializer):
+    reviews = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Product
         fields = '__all__'
 
+    def get_reviews(self,obj):
+        reviews = obj.reviews_set.all()    
+        serializer = ReviewSerializer(reviews,many=True)
+        return serializer.data
 
 class UserSerializer(serializers.ModelSerializer):
 

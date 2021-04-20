@@ -28,6 +28,7 @@ class Reviews(models.Model):
     rating = models.IntegerField(null=True,blank=True,default=0)
     comment = models.TextField(null=True,blank=True)
     _id = models.AutoField(primary_key=True,editable=False)
+    createdAt = models.DateTimeField(auto_now_add = True)
 
     def __str__(self):
         return str(self.rating)
@@ -58,7 +59,7 @@ class OrderItem(models.Model):
     name = models.CharField(max_length=100,null=True,blank=True)
     qty = models.IntegerField(null=True,blank=True,default=0)
     price = models.DecimalField(max_digits=7, decimal_places=2,null=True,blank=True)
-    image= models.ImageField(null=True,blank=True) 
+    image= models.ImageField(null=True,blank=True,default="/images/sample.PNG") 
     
     _id = models.AutoField(primary_key=True,editable=False) 
 
