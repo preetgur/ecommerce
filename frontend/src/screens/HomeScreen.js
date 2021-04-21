@@ -7,6 +7,7 @@ import { listProduct } from '../actions/productActions'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useLocation } from 'react-router'
 import Paginate from '../components/Paginate'
+import ProductCarousel from '../components/ProductCarousel'
 
 
 function HomeScreen() {
@@ -30,11 +31,15 @@ function HomeScreen() {
 
     return (
         <div className="homeScreen">
+            {!keyword && <ProductCarousel />}
+
             <h1>Latest Products</h1>
             
             {loading ? <h1>Loading ...</h1> : error ? <h1>{error}</h1>
                 :
                 <>
+                    
+
                         <div className="homeScreen__latestProducts">
 
                             {products.map(product => (
@@ -43,7 +48,7 @@ function HomeScreen() {
 
                             ))}
                     </div>
-                    
+
                     <Paginate page={page} pages={pages} keyword={keyword} />
 
                     </>

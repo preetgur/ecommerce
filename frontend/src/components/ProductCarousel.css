@@ -1,0 +1,10 @@
+.slider{
+  width: 80%;
+}
+
+.sliderImage{
+  
+    border-radius: 50%;
+    display: block;
+    margin: auto;
+}
