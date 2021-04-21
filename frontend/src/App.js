@@ -1,6 +1,6 @@
 import Header from './components/Header'
 import Footer from './components/Footer'
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+import {HashRouter as Router, Route, Switch} from 'react-router-dom'
 import HomeScreen from './screens/HomeScreen' 
 import ProductScreen from './screens/ProductScreen';
 import CartScreen from './screens/CartScreen';
