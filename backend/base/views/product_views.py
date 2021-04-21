@@ -12,21 +12,41 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 from django.contrib.auth.hashers import make_password
 from rest_framework import status
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 @api_view(['GET'])
 def getProducts(request):
 
     query = request.query_params.get('keyword')
+
     print("query ### ",query)
     if query == None:
         query = ""
 
     # if the query is empty the filter showcase all the data
     products = Product.objects.filter(name__icontains=query)
-    serialzer = ProductSerializer(products,many=True) 
 
+    # get page from queryParams
+    page = request.query_params.get('page')
+    print("page from query_params ..",page)
+    # Show 2 products per page.
+    paginator = Paginator(products,5) 
+    
+    try:
+        products = paginator.page(page)
+    except PageNotAnInteger: # if page is not sent from frontend then go to first page
+        products = paginator.page(1)
+    except EmptyPage: # if we have 6 pages and user want to go to the 9 page then redirect the user to last page
+        products = paginator.page(paginator.num_pages)
+
+    if page == None:
+        page = 1
+
+    page = int(page)    
+    serialzer = ProductSerializer(products,many=True) 
+    
    
-    return Response(serialzer.data)
+    return Response({"products":serialzer.data, "page":page,"pages":paginator.num_pages})
 
 @api_view(['GET'])
 def getProduct(request,pk):

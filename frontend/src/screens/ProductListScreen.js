@@ -1,20 +1,22 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, useHistory, useLocation } from 'react-router-dom'
 import { deleteProduct, listProduct } from '../actions/productActions'
 import { deleteUser, userDelete, userList as userListAction } from '../actions/userActions'
+import Paginate from '../components/Paginate'
 import "./UserListScreen.css"
 
 function ProductListScreen() {
 
     const dispatch = useDispatch()
     const history = useHistory()
-
+    const location = useLocation()
+    const keyword = location.search
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
     const productList = useSelector(state => state.productList)
-    const { loading,  error, products } = productList
+    const { loading,  error, products,page,pages } = productList
 
 
     const deleteProd = useSelector(state => state.deleteProduct)
@@ -24,13 +26,13 @@ function ProductListScreen() {
 
         if (userInfo && userInfo.isAdmin) {
 
-            dispatch(listProduct())
+            dispatch(listProduct(keyword))
         }
         else {
             history.push('/login')
         }
 
-    }, [dispatch,successDelete])
+    }, [dispatch,successDelete,keyword])
 
 
     const deletehandler = (id) => {
@@ -56,7 +58,7 @@ function ProductListScreen() {
                     error ? <p>{error}</p> :
                         (
 
-
+                        <>
                             <table>
                                 <tr>
                                     <th>ID</th>
@@ -89,10 +91,15 @@ function ProductListScreen() {
 
                                     </tr>
                                 ))
+                                    
+                                     
                                 }
 
 
                             </table>
+
+                                < Paginate page={page} pages={pages} isAdmin={true} />
+                            </>
                         )
                 }
             </div>

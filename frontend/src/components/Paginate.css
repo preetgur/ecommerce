@@ -1,0 +1,12 @@
+.paginate{
+    display: flex;
+}
+.p{
+    padding: 10px;
+}
+
+.current_page{
+    color : white;
+    padding:10px;
+    background: rgb(0, 0, 194) !important;
+}   

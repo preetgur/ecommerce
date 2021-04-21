@@ -11,7 +11,7 @@ function SearchBox() {
         console.log('search Handler ..', keyword);
         if (keyword) {
             // go to homeScreen page with query params: localhost/?keyword=airpods
-            history.push(`/?keyword=${keyword}`)
+            history.push(`/?keyword=${keyword}&page=1`)
     
         }
 

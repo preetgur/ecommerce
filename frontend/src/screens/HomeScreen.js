@@ -6,6 +6,7 @@ import axios from "axios"
 import { listProduct } from '../actions/productActions'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useLocation } from 'react-router'
+import Paginate from '../components/Paginate'
 
 
 function HomeScreen() {
@@ -14,7 +15,7 @@ function HomeScreen() {
      
     const dispatch = useDispatch()
     const productList = useSelector(state => state.productList)
-    const {products,loading,error } =  productList
+    const {products,loading,error,page,pages } =  productList
     //productList is reducer
     const location = useLocation()
     console.log('loaction ... ',location);
@@ -32,7 +33,8 @@ function HomeScreen() {
             <h1>Latest Products</h1>
             
             {loading ? <h1>Loading ...</h1> : error ? <h1>{error}</h1>
-                        :
+                :
+                <>
                         <div className="homeScreen__latestProducts">
 
                             {products.map(product => (
@@ -40,9 +42,13 @@ function HomeScreen() {
                                 <Product key={product._id} product={product} />
 
                             ))}
-                        </div>
+                    </div>
+                    
+                    <Paginate page={page} pages={pages} keyword={keyword} />
+
+                    </>
             }
-           
+
 
         </div>
     )
