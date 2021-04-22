@@ -99,34 +99,26 @@ def updateProduct(request,pk):
     serializer = ProductSerializer(product,many=False)
   
     return Response(serializer.data)
-
-
+# concept is create dummy Product onClick and then redirect the user to Edit page.
 
 @api_view(['POST'])
 @permission_classes([IsAdminUser])
-def createProduct(request,pk):
+def createProduct(request):
+    user = request.user
 
-    try :
-        data = request.data
-        print("create product ..",data)
-        product = Prodcut.objects.create(
-            user = request.user,
-            name=data['name'],
-            price = data['price'],
-            category = data['category'],
-            brand = data['category'],
-            countInStock = data['countInStock'],
-            description = data['description'],
-            numReviews = data['reviews'],
-            rating = data['rating'],   
-        )
+    product = Product.objects.create(
+        user=user,
+        name='Sample Name',
+        price=0,
+        brand='Sample Brand',
+        countInStock=0,
+        category='Sample Category',
+        description=''
+    )
 
-        product.save()  # save before serialize the data 
-        serializer = ProductSerializer(product,many=False)
-        return Response(serializer.data)
+    serializer = ProductSerializer(product, many=False)
+    return Response(serializer.data)
 
-    except:
-        return Response("some error ocuured")    
 
 
 # update the product image

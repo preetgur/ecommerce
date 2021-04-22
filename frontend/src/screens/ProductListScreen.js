@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory, useLocation } from 'react-router-dom'
-import { deleteProduct, listProduct } from '../actions/productActions'
+import { deleteProduct, listProduct,createProduct } from '../actions/productActions'
 import { deleteUser, userDelete, userList as userListAction } from '../actions/userActions'
 import Paginate from '../components/Paginate'
+import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
 import "./UserListScreen.css"
 
 function ProductListScreen() {
@@ -22,17 +23,25 @@ function ProductListScreen() {
     const deleteProd = useSelector(state => state.deleteProduct)
     const { loading: loadingDelete, success: successDelete, error: errorDelete } = deleteProd
     
+    const productCreate = useSelector(state => state.productCreate)
+    const { loading: loadingCreate, error: errorCreate, success: successCreate, product: createdProduct } = productCreate
+
     useEffect(() => {
+        
 
-        if (userInfo && userInfo.isAdmin) {
+      
+        dispatch({ type: PRODUCT_CREATE_RESET })
 
-            dispatch(listProduct(keyword))
-        }
-        else {
+        if (!userInfo.isAdmin) {
             history.push('/login')
         }
 
-    }, [dispatch,successDelete,keyword])
+        if (successCreate) {
+            history.push(`/admin/product/${createdProduct._id}`)
+        } else {
+            dispatch(listProduct(keyword))
+        }
+    }, [dispatch, successDelete, keyword, successCreate, createdProduct])
 
 
     const deletehandler = (id) => {
@@ -44,12 +53,17 @@ function ProductListScreen() {
         }
     }
 
+    const createProductHandler = () => {
+
+        dispatch(createProduct())
+    }
+
     return (
         <div className="userListScreen">
             <h1>Product List</h1>
-            <Link to={"/admin/product/:id?"}>
-            <button><i className="fas fa-plus"></i> Create Product</button>
-            </Link>
+            {/* <Link to={"/admin/product/:id?"}> */}
+            <button onClick={createProductHandler}><i className="fas fa-plus"></i> Create Product</button>
+            {/* </Link> */}
             {errorDelete && <p>{errorDelete}</p>}
 
 

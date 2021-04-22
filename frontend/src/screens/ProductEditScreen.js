@@ -168,7 +168,7 @@ function ProductEditScreen() {
                         
                         <div className="loginScreen__email">
                             <label htmlFor="name"> <small>Image </small> </label>
-                            <input type="text" placeholder="Enter Description" value={image} onChange={e => setImage(e.target.value)} />
+                            <input type="text" placeholder="Image path" value={image} onChange={e => setImage(e.target.value)} />
                         </div>
 
                         <div>
