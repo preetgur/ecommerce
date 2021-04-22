@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'base.apps.BaseConfig',   # installed apps
     'rest_framework', 
     'corsheaders',    # for making api call to backend
+    'storages',
 
 ]
 
@@ -126,10 +127,10 @@ DATABASES = {
 
      'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'proshop',
-        'USER' : 'postgres',
-        'PASSWORD' : 'Admin@1313',
-        'HOST' : 'localhost',
+        'NAME': 'proshop',  # database name from aws
+        'USER' : 'preetgur', #  master username from aws
+        'PASSWORD' : 'Admin1313', # master password
+        'HOST' : 'proshop-identifier.crdmjyvkrcp5.us-east-2.rds.amazonaws.com',
         'PORT': '5432'
     }
 }
@@ -182,3 +183,11 @@ STATICFILES_DIRS = [
 MEDIA_ROOT = 'static/images'  # for user upload
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+AWS_QUERYSTRING_AUTH = False
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_ACCESS_KEY_ID = "AKIA3SFJSCLSKYORA2NQ"
+AWS_SECRET_ACCESS_KEY = "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"
+
+AWS_STORAGE_BUCKET_NAME = "proshop-bucket-0137"
