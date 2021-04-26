@@ -9,6 +9,8 @@ import { useHistory, useLocation } from 'react-router'
 import Paginate from '../components/Paginate'
 import ProductCarousel from '../components/ProductCarousel'
 
+import { Button,Spinner} from 'react-bootstrap'
+import Loading from '../components/Loading'
 
 function HomeScreen() {
 
@@ -33,12 +35,13 @@ function HomeScreen() {
         <div className="homeScreen">
             {!keyword && <ProductCarousel />}
 
-            <h1>Latest Products</h1>
             
-            {loading ? <h1>Loading ...</h1> : error ? <h1>{error}</h1>
+            
+            {loading ? <Loading message="Products"/> : error ? <h1>{error}</h1>
                 :
                 <>
-                    
+                    <h1>Latest Products</h1>
+
 
                         <div className="homeScreen__latestProducts">
 

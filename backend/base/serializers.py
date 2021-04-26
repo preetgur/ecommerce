@@ -30,15 +30,20 @@ class UserSerializer(serializers.ModelSerializer):
     # rename the id fields because in frontend we have "_id" as product id
     _id = serializers.SerializerMethodField(read_only=True)
     isAdmin = serializers.SerializerMethodField(read_only=True)
+    isActive = serializers.SerializerMethodField(read_only=True)
+
 
 
     class Meta:
         model = User
-        fields = ['id','_id','username','email','last_login','name','isAdmin']
+        fields = ['id','_id','username','email','last_login','name','isAdmin','isActive']
 
 
     def get__id(self,obj):
         return obj.id
+
+    def get_isActive(self,obj):
+            return obj.is_active
 
     def get_isAdmin(self,obj):
             return obj.is_staff
@@ -79,9 +84,15 @@ class ShippingAddressSerializer(serializers.ModelSerializer):
  
 class OrderItemSerializer(serializers.ModelSerializer):
 
+    image_url = serializers.SerializerMethodField(read_only=True)
+
     class Meta :
         model = OrderItem
-        fields = "__all__" 
+        fields = ['_id','image_url','name','qty','price','product','order','image']
+
+    
+    def get_image_url(self, obj):
+        return obj.image.url
 
 class OrderSerializer(serializers.ModelSerializer):
 
@@ -98,6 +109,7 @@ class OrderSerializer(serializers.ModelSerializer):
 
         item = obj.orderitem_set.all()    # OrderItem has "Fk" realtionship with "Order" model
         serializer = OrderItemSerializer(item,many=True) 
+        print("getorderserializer ###########@@@@@@@ ",serializer.data)
         return serializer.data
 
     def get_shippingAddress(self,obj):

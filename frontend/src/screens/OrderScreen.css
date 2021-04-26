@@ -1,0 +1,33 @@
+.loading__center{
+    color : red;
+
+    margin-top:  200px;
+}
+
+
+@media screen and (max-width:500px) {
+    
+    .orderScreen__shipping{
+            display: flex;
+    flex-direction: column;
+    margin-left: 10px; 
+    }
+
+    .orderScreen__shipping>p{
+        font-size: smaller;
+    }
+
+    .OrderScreen__paymentMethod{
+    margin-left: 10px; 
+
+        display: flex;
+        flex-direction: column;
+    }
+
+    .orderScreen__shipping >h3, .OrderScreen__paymentMethod >h3 , .placeOrderScreen__second > h3
+    {
+        text-transform: uppercase;
+    font-weight: 100;
+    font-family: sans-serif;
+    }
+}

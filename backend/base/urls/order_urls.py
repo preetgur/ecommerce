@@ -9,6 +9,7 @@ urlpatterns = [
     path('shipping',view.shipping,name="shipping"),
     path('addorderItem',view.addOrderItem,name="add-order-item") ,
     path('myorders',view.getMyOrders,name="get-my-orders") ,
+    path('orderImage/<str:pk>/', view.orderItemImage,name="orderItem-image"),
 
     # dynamic url should be at the bottom otherwise it may give error
     path("<str:pk>/",view.getOrderById,name="get-order-by-id") ,

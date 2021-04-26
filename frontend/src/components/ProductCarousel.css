@@ -11,3 +11,22 @@
     margin-top: 20px;
     margin-bottom: 20px;
 }
+
+@media Screen and (max-width:500px) {
+
+  .slider{
+    width: 100%;
+  }
+
+  .sliderImage {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 50vh;
+  }
+
+  .carousel__caption{
+    font-size:large;
+    color : gray;
+  }
+} 

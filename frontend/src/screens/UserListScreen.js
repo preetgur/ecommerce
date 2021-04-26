@@ -3,6 +3,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory } from 'react-router-dom'
 import { deleteUser, userDelete, userList as userListAction} from '../actions/userActions'
 import "./UserListScreen.css"
+import { LinkContainer } from 'react-router-bootstrap'
+import { Table, Button, Alert } from 'react-bootstrap'
+import Loading from '../components/Loading'
+import AlertMessage from '../components/AlertMessage'
+
 
 function UserListScreen() {
 
@@ -43,54 +48,58 @@ function UserListScreen() {
 
     return (
         <div className="userListScreen">
-            <h1>User List</h1>
+            <h3>Users</h3>
+            {loading
+                ? (<Loading />)
+                : error
+                    ? (<AlertMessage variant='danger'>{error}</AlertMessage>)
+                    : (
+                        <Table striped bordered hover  className='table-sm' responsive="sm"  size="sm" >
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>NAME</th>
+                                    <th>EMAIL</th>
+                                    <th>ADMIN</th>
+                                    <th>Active</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
 
+                            <tbody>
+                                {users?.map(user => (
+                                    <tr key={user._id}>
+                                        <td>{user._id}</td>
+                                        <td>{user.name}</td>
+                                        <td>{user.email}</td>
+                                        <td>{user.isAdmin ? (
+                                            <i className='fas fa-check' style={{ color: 'green' }}></i>
+                                        ) : (
+                                            <i className='fas fa-check' style={{ color: 'red' }}></i>
+                                        )}</td>
 
-            <div className="userListScreen__First"> 
-                {errorDelete && <p>{ errorDelete}</p>}
-                {loading ? "loading userlist.." :
-                    error ? <p>{error}</p> :
-                        (
-                            
-                    
-            <table>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Admin</th>
-                    <th>Action</th>
+                                        <td>{user.isActive ? (
+                                            <i className='fas fa-check' style={{ color: 'green' }}></i>
+                                        ) : (
+                                            <i className='fas fa-check' style={{ color: 'red' }}></i>
+                                        )}</td>
 
-                </tr>
+                                        <td>
+                                            <LinkContainer to={`/admin/user/${user._id}`}>
+                                                <Button variant='light' className='btn-sm'>
+                                                    <i className='fas fa-edit'></i>
+                                                </Button>
+                                            </LinkContainer>
 
-                {users?.map((user) => (
-                    <tr key={user._id}>
-                        <td>{user._id}</td>
-                        <td>{user.name}</td>
-                        <td>{user.email}</td>
-
-                        <td>{user.isAdmin ?
-                            <i className="fas fa-check" style={{ color: "green" }}></i> : <i className="fas fa-check" style={{ color: "red" }}></i>}</td>
-
-                        <td>{
-                            <Link to={`/admin/user/${user._id}`}>
-                                <i className="fas fa-edit" style={{ color: "green" }}></i>
-                            </Link>}
-                        
-                            <button onClick={()=>deletehandler(user._id)} ><i className="fas fa-trash" style={{ }}></i></button>
-                        </td>
-
-
-
-                    </tr>
-                ))
-                }
-
-
-                            </table>
-                        )
-                }
-            </div>
+                                            <Button variant='danger' className='btn-sm' onClick={() => deletehandler(user._id)}>
+                                                <i className='fas fa-trash'></i>
+                                            </Button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </Table>
+                    )}
         </div>
     )
 }

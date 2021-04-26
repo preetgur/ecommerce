@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import { Alert } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory, useLocation, useParams } from 'react-router'
 import { Link } from 'react-router-dom'
@@ -141,33 +142,33 @@ function ProductEditScreen() {
                         </div>
 
                         <div className="loginScreen__email">
-                            <label htmlFor="email"> <small>Category </small> </label>
-                            <input type="email" placeholder="Enter Your Email" value={category} onChange={e => setCategory(e.target.value)} />
+                            <label htmlFor="category"> <small>Category </small> </label>
+                            <input type="text" placeholder="Enter Product Category" value={category} onChange={e => setCategory(e.target.value)} />
                         </div>
 
                         <div className="loginScreen__email">
-                            <label htmlFor="email"> <small>Brand </small> </label>
-                            <input type="email" placeholder="Enter Your Email" value={brand} onChange={e => setBrand(e.target.value)} />
+                            <label htmlFor="brand"> <small>Brand </small> </label>
+                            <input type="text" placeholder="Enter Product Brand" value={brand} onChange={e => setBrand(e.target.value)} />
                         </div>
 
                         <div className="loginScreen__email">
-                            <label htmlFor="name"> <small>Price </small> </label>
-                            <input type="text" placeholder="Enter Your name" value={price} onChange={e => setPrice(e.target.value)} />
+                            <label htmlFor="price"> <small>Price </small> </label>
+                            <input type="text" placeholder="Enter Product Price" value={price} onChange={e => setPrice(e.target.value)} />
                         </div>
                         
                         <div className="loginScreen__email">
-                            <label htmlFor="name"> <small>Stock </small> </label>
-                            <input type="text" placeholder="Enter Stock" value={countInStock} onChange={e => setCountInStock(e.target.value)} />
+                            <label htmlFor="stock"> <small>Stock </small> </label>
+                            <input type="number" placeholder="Enter Stock" value={countInStock} onChange={e => setCountInStock(e.target.value)} />
                         </div>
 
                         <div className="loginScreen__email">
-                            <label htmlFor="name"> <small>Description </small> </label>
+                            <label htmlFor="description"> <small>Description </small> </label>
                             <input type="text" placeholder="Enter Description" value={description} onChange={e => setDescription(e.target.value)} />
                         </div>
 
                         
                         <div className="loginScreen__email">
-                            <label htmlFor="name"> <small>Image </small> </label>
+                            <label htmlFor="Image"> <small>Image </small> </label>
                             <input type="text" placeholder="Image path" value={image} onChange={e => setImage(e.target.value)} />
                         </div>
 
@@ -176,9 +177,12 @@ function ProductEditScreen() {
                         </div>
 
 
-
-
-                        <input type="submit" className="loginScreen__btn" value="Update Product" onClick={productUpdateHandler} />
+                    
+                    { image ?
+                            <input type="submit" className="loginScreen__btn" value="Update Product" onClick={productUpdateHandler} />
+                            :
+                            <input type="" className="loginScreen__btn text-danger" value="Update Product" disabled/>
+                        }
                     </form>
 
 

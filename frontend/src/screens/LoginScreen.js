@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useHistory, useLocation } from 'react-router-dom'
-import { userLogin } from '../actions/userActions' 
+import { userLogin } from '../actions/userActions'
+import AlertMessage from '../components/AlertMessage'
 import './LoginScreen.css'
+import {Alert} from 'react-bootstrap'
 
 function LoginScreen() {
 
@@ -41,9 +43,14 @@ function LoginScreen() {
 
                 {loading ? <h1>Loading ...</h1> : <> 
 
-                <h1>Sign IN</h1>
 
-                    {error && <h1 className="loginScreen__error">{error}</h1>}
+                    {error && 
+                        <AlertMessage variant="danger">
+                        {error}
+                        </AlertMessage>   
+                    }
+                    <h1>Sign IN</h1>
+
             <form>
 
 

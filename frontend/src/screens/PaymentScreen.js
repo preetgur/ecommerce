@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Alert } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
 import { savePaymentMethod } from '../actions/cartActions'
@@ -36,7 +37,8 @@ function PaymentScreen() {
             <CheckoutSteps step1 step2 step3 />
 
             
-            <h1>Select Method </h1>
+            <h3>Select Payment Method </h3>
+            <Alert variant="danger" className="text-center"> Currenty Paypal Payment Method is Working.</Alert>
             <form onSubmit={submitHandler}>
 
                 <div className="paymentScreen__input"> 
@@ -45,12 +47,12 @@ function PaymentScreen() {
                 
                 <div className="paymentScreen__input">
 
-                    <input type="radio" name="payment" value="Stripe" onChange={e => setPaymentMethod(e.target.value)} /> Stripe
+                    <input type="radio" name="payment" value="Stripe" onChange={e => setPaymentMethod(e.target.value)} disabled/> Stripe
                     </div>
                 
                 <div className="paymentScreen__input">
 
-                    <input type="radio" name="payment" value="Paytm" onChange={e => setPaymentMethod(e.target.value)} /> Paytm
+                    <input type="radio" name="payment" value="Paytm" onChange={e => setPaymentMethod(e.target.value)} disabled /> Paytm
                     </div>
                 
                 <input type="submit" value = "Proceed" className="paymentScreen__btn"/>

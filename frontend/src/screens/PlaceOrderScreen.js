@@ -68,17 +68,17 @@ function PlaceOrderScreen() {
 
                     <div className="placeOrderScreen__shipping">
                       
-                    <h1>Shipping</h1>
+                    <h3>Shipping</h3>
                     shipping : {shipping.address}, {shipping.city} {shipping.postalCode},{shipping.country} {"( landmark : " + shipping.landmark + " )"}
                 </div>
 
                 <div className="placeOrderScreen__paymentMethod">
-                    <h1>Payment Method</h1>
+                    <h3>Payment Method</h3>
                     Method :  {paymentMethod.method}
                 </div>
 
                     <div className="placeOrderScreen__cart">
-                        <h1>Order Items</h1>
+                        <h3>Order Items</h3>
 
                     {cartItems.map(item => {
                         return <div className="placeOrderScreen__cart__items">
@@ -87,7 +87,7 @@ function PlaceOrderScreen() {
                             <Link to={`/product/${item.product}`} className="placeOrderScreen__cart__items__name"> {item.name}</Link>
 
                             <p className="placeOrderScreen__cart__items__qty">
-                                {item.qty}  X {item.price}  =  {(item.qty * item.price).toFixed(2)}
+                                {item.qty}  X {item.price}  =  {(item.qty * item.price).toFixed(2)} <i class="fas fa-rupee-sign"></i>
                             </p>
                             
                            
@@ -100,29 +100,31 @@ function PlaceOrderScreen() {
                 <div className="placeOrderScreen__second">
                     {error && <p className="placeOrderScreen__error">{error}</p>}
 
-                    <h1>Order Summary</h1>
+                    <h3>Order Summary</h3>
 
                     <div>
                         <p>item</p>
-                        <p> ${cart.itemsPrice}</p>
+                        <p> {cart.itemsPrice} <i class="fas fa-rupee-sign"></i></p>
                     </div>
 
                     <div>
                         <p>shipping Price</p>
-                        <p> ${cart.shippingPrice}</p>
+                        <p> {cart.shippingPrice} <i class="fas fa-rupee-sign"></i></p>
                     </div>
 
                     <div>
                         <p>tax</p>
-                        <p> ${cart.tax}</p>
+                        <p> {cart.tax}<i class="fas fa-rupee-sign"></i></p>
                     </div>
 
                     <div>
                         <p>Total</p>
-                        <p> ${cart.total}</p>
+                        <p> {cart.total}<i class="fas fa-rupee-sign"></i></p>
                     </div>
+                    {cart.itemsPrice > 0 && 
+                        <input type="button" Value="Confirm Order" className="PlaceOrderScreen__btn" onClick={placeOrderHandler} />
 
-                    <input type="button" Value="Place Order" className="PlaceOrderScreen__btn" onClick={placeOrderHandler}/>
+                    }
             </div>
                 
             </div>

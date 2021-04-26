@@ -5,6 +5,8 @@ import { deleteProduct, listProduct,createProduct } from '../actions/productActi
 import { deleteUser, userDelete, userList as userListAction } from '../actions/userActions'
 import Paginate from '../components/Paginate'
 import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
+import { LinkContainer } from 'react-router-bootstrap'
+import { Table, Button, Row, Col } from 'react-bootstrap'
 import "./UserListScreen.css"
 
 function ProductListScreen() {
@@ -44,7 +46,7 @@ function ProductListScreen() {
     }, [dispatch, successDelete, keyword, successCreate, createdProduct])
 
 
-    const deletehandler = (id) => {
+    const deleteHandler = (id) => {
 
         if (window.confirm(`Are You Sure You Want To Delete Product With ${id} ?`)) {
         
@@ -60,9 +62,17 @@ function ProductListScreen() {
 
     return (
         <div className="userListScreen">
-            <h1>Product List</h1>
-            {/* <Link to={"/admin/product/:id?"}> */}
-            <button onClick={createProductHandler}><i className="fas fa-plus"></i> Create Product</button>
+            <Row className='align-items-center mx-1'>
+                <Col>
+                    <h3>Products</h3>
+                </Col>
+
+                <Col className='text-right'>
+                    <Button className='my-3 ' onClick={createProductHandler}>
+                        <i className='fas fa-plus'></i> Create Product
+                    </Button>
+                </Col>
+            </Row>
             {/* </Link> */}
             {errorDelete && <p>{errorDelete}</p>}
 
@@ -73,7 +83,8 @@ function ProductListScreen() {
                         (
 
                         <>
-                            <table>
+                                <Table striped bordered hover responsive className='table-sm'>
+                                    <thead>
                                 <tr>
                                     <th>ID</th>
                                     <th>Name</th>
@@ -82,7 +93,9 @@ function ProductListScreen() {
                                     <th>Brand</th>
                                     <th>Action</th>
                                 </tr>
-
+                                    </thead>
+                                    
+                                    <tbody>
                                 {products?.map((product) => (
                                     <tr key={product._id}>
                                         <td>{product._id}</td>
@@ -92,12 +105,17 @@ function ProductListScreen() {
                                         <td>{product.brand}</td>
 
 
-                                        <td>{
-                                            <Link to={`/admin/product/${product._id}`}>
-                                                <i className="fas fa-edit" style={{ color: "green" }}></i>
-                                            </Link>}
+                                        <td>
+                                            
+                                            <LinkContainer to={`/admin/product/${product._id}`}>
+                                                <Button variant='light' className='btn-sm'>
+                                                    <i className='fas fa-edit'></i>
+                                                </Button>
+                                            </LinkContainer>
 
-                                            <button onClick={() => deletehandler(product._id)} ><i className="fas fa-trash" style={{}}></i></button>
+                                            <Button variant='danger' className='btn-sm' onClick={() => deleteHandler(product._id)}>
+                                                <i className='fas fa-trash'></i>
+                                            </Button>
                                             
                                         </td>
 
@@ -109,8 +127,8 @@ function ProductListScreen() {
                                      
                                 }
 
-
-                            </table>
+                                </tbody>
+                            </Table>
 
                                 < Paginate page={page} pages={pages} isAdmin={true} />
                             </>

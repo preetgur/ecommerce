@@ -3,8 +3,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
 import { Link } from 'react-router-dom'
 import { myOrder } from '../actions/orderActions'
-import { userProfile, userUpdateProfile} from '../actions/userActions'
+import { userProfile, userUpdateProfile } from '../actions/userActions'
 import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants'
+import { Form, Row, Col,Button,Table } from 'react-bootstrap'
 import './ProfileScreen.css'
 
 function ProfileScreen() {
@@ -15,6 +16,8 @@ function ProfileScreen() {
     const [email, setEmail] = useState("")
     const [name, setName] = useState("")
     const [message, setMessage] = useState("")
+    const [isActive, setIsActive] = useState(false)
+
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
 
@@ -28,10 +31,10 @@ function ProfileScreen() {
     const { success } = userUpdateProf
 
     const myOrd = useSelector(state => state.myOrder)
-    const { loading:loadingOrder, error:errorOrder, order } = myOrd
-    
+    const { loading: loadingOrder, error: errorOrder, order } = myOrd
+
     useEffect(() => {
-        
+
         if (!userInfo) {
             history.push("/login")
         }
@@ -40,20 +43,22 @@ function ProfileScreen() {
             if (!user || !user.username || success || userInfo._id !== user._id) {
 
                 dispatch({
-                    type : USER_UPDATE_PROFILE_RESET
+                    type: USER_UPDATE_PROFILE_RESET
                 })
                 dispatch((userProfile(userInfo._id)))
                 dispatch(myOrder())
             }
             else {
-
+                console.log("user #### ",user)
                 setEmail(user.email)
                 setName(user.name)
+                setIsActive(user.isActive)
+
 
             }
         }
-    }, [dispatch, history, user,success])
-    
+    }, [dispatch, history, user, success])
+
     const profileUpdateHandler = (e) => {
         e.preventDefault();
         setMessage("")
@@ -65,7 +70,7 @@ function ProfileScreen() {
 
         else {
 
-            dispatch(userUpdateProfile(email,name ,password))
+            dispatch(userUpdateProfile(email, name, password))
         }
 
     }
@@ -78,83 +83,118 @@ function ProfileScreen() {
                 <div className="profileScreen__First">
 
 
-                {loading ? <h1>Loading ...</h1> : <>
+                    {loading ? <h1>Loading ...</h1> : <>
 
-                    <h1>Profile</h1>
+                        <h1>Profile</h1>
 
-                    {error && <h1 className="profileScreen__error">{error}</h1>}
-                    {message && <h1 className="profileScreen__error">{message}</h1>}
-
-                    <form className="profileScreen__form">
+                        {error && <h1 className="profileScreen__error">{error}</h1>}
+                        {message && <h1 className="profileScreen__error">{message}</h1>}
 
 
-                        <div className="profileScreen__email">
-                            <label htmlFor="email"> <small>Email Address </small> </label>
-                            <input type="email" placeholder="Enter Your Email" value={email} onChange={e => setEmail(e.target.value)} />
-                        </div>
 
-                        <div className="profileScreen__name">
-                            <label htmlFor="name"> <small>Name </small> </label>
-                            <input type="text" placeholder="Enter Your name" value={name} onChange={e => setName(e.target.value)} />
-                        </div>
-
-                        <div className="profileScreen__password">
-
-                            <label htmlFor="password">Password</label>
-                            <input type="password" placeholder="Enter Your Password" value={password} onChange={e => setPassword(e.target.value)} />
-                        </div>
-
-                        <div className="profileScreen__password">
-
-                            <label htmlFor="password">Confirm Password</label>
-                            <input type="password" placeholder="Enter Your Password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} />
-                        </div>
-
-                        <input type="submit" className="profileScreen__updateBtn" value="update" onClick={profileUpdateHandler} />
-                    </form>
+                        <Form>
+                            <Form.Group as={Row} controlId="formPlaintextEmail">
+                                <Form.Label column sm="2">
+                                    Email
+                                </Form.Label>
+                                <Col sm="10">
+                                    <Form.Control plaintext readOnly defaultValue={email} onChange={e => setEmail(e.target.value)} />
+                                </Col>
+                            </Form.Group>
 
 
-                </>}
+                            <Form.Group as={Row} controlId="formPlaintextEmail">
+                                <Form.Label column sm="2">
+                                    Name
+                                </Form.Label>
+                                <Col sm="10">
+                                    <Form.Control  defaultValue={name} onChange={e => setName(e.target.value)} />
+                                </Col>
+                            </Form.Group>
+
+                            <Form.Group as={Row} controlId="formPlaintextPassword">
+                                <Form.Label column sm="2">
+                                    Password
+    </Form.Label>
+                                <Col sm="10">
+                                    <Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+                                </Col>
+                            </Form.Group>
+
+
+                            <Form.Group as={Row} controlId="formPlaintextPassword">
+                                <Form.Label column sm="2">
+                                    Confirm Password
+                                    </Form.Label>
+                                <Col sm="10">
+                                    <Form.Control type="password" placeholder="Password" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} />
+                                </Col>
+                            </Form.Group>
+
+                            <Form.Group id="formGridCheckbox">
+                                <Form.Check type="checkbox" checked={isActive} label="Active Account" onChange={() => setIsActive(!isActive)} />
+                            </Form.Group>
+
+                            <Button variant="primary" type="submit" onClick={profileUpdateHandler}>
+                                Update
+                            </Button>
+
+                        </Form>
+                       
+
+                    </>}
                 </div>
-                
+
                 <div className="profileScreen__second">
 
-                    
-                    <table>
+                    {
+                        loadingOrder && order ? "some error occured while fetching the user orderList" : <>
+                        
+                            <Table striped bordered hover className='table-sm' responsive="sm" size="sm">
+                                <thead>
                         <tr>
                             <th>ID</th>
                             <th>Date</th>
                             <th>Total</th>
                             <th>Paid</th>
                             <th>Delivered</th>
+                            <th></th>
 
-                        </tr>
-                      
-                            {order?.map((item) => (
-                                <tr key={item._id}> 
-                                    <td>{item._id}</td>
-                                    <td>{item.createdAt.substring(0,10)}</td>
-                                    <td>{item.totalPrice}</td>
-                                    <td>{item.isPaid ? item.paidAt.substring(0, 10) : "Pending"}</td>
+                                    </tr>
+                                </thead>
 
-                                    <td>{item.isDelivered ?
-                                        item.deliveredAt.substring(0, 10) :
-                                        <Link to={`order/${item._id}`}>
-                                        
-                                            <p className="profileScreen__btn" >Details</p>
-                                        </Link>}</td>
+                                <tbody>
+                                
+                        {order?.map((item) => (
+                            <tr key={item._id}>
+                                <td>{item._id}</td>
+                                <td>{item.createdAt.substring(0, 10)}</td>
+                                <td>{item.totalPrice}</td>
+                                {/* <td>{item.isPaid ? item.paidAt.substring(0, 10) : "Pending"}</td> */}
+                                <td>{item.isPaid ? <i class="far fa-check-circle m-auto text-success"></i>  : "Pending"}</td>
 
 
+                                <td>{item.isDelivered ?
+                                    <i class="far fa-check-circle m-auto text-success"></i> : "pending"
+                                }
+                                </td>
 
-                                </tr>
-                            ))
-                            }
-                            
-                       
-                      </table>  
-                    
+                                <td><Link to={`order/${item._id}`}>
 
-                    
+                                    <p className="profileScreen__btn" >Details</p>
+                                </Link>
+                                </td>
+
+                            </tr>
+                        ))
+                        }
+
+                                </tbody>
+                    </Table>
+
+
+                        </>
+                    }
                 </div>
             </div>
 

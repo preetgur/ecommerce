@@ -15,6 +15,8 @@ function UserEditScreen() {
     const [email, setEmail] = useState("")
     const [name, setName] = useState("")
     const [isAdmin, setIsAdmin] = useState(false)
+    const [isActive, setIsActive] = useState(false)
+
 
     const [message, setMessage] = useState("")
     const userGetAdmin = useSelector(state => state.userGetAdmin)
@@ -43,7 +45,7 @@ function UserEditScreen() {
                 setName(user.name)
                 setEmail(user.email)
                 setIsAdmin(user.isAdmin)
-
+                setIsActive(user.isActive)
             }
 
         }
@@ -59,6 +61,7 @@ function UserEditScreen() {
             name,
             email,
             isAdmin,
+            isActive,
             id : params.id
         }))
         
@@ -99,6 +102,13 @@ function UserEditScreen() {
                             <label htmlFor="password">Is Admin</label>
                             <input type="checkbox" placeholder="Enter Your Password" checked={isAdmin} onChange={() => setIsAdmin(!isAdmin)} />
                         </div>
+
+                        <div className="loginScreen__checkbox">
+
+                            <label htmlFor="password">Is Active</label>
+                            <input type="checkbox" placeholder="Enter Your Password" checked={isActive} onChange={() => setIsActive(!isActive)} />
+                        </div>
+
 
                         
 

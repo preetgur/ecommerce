@@ -161,11 +161,12 @@ def createProductReview(request,pk):
     # create review
 
     else :
+        print("### user firstname .. ",user.first_name,user.email)
         review = Reviews.objects.create( 
             user = user,
             product = product,
             rating = data['rating'],
-            name = user.first_name,
+            name = user.email,
             comment = data['comment']
         )    
 

@@ -37,6 +37,7 @@ import {
 
 } from '../constants/userConstants'
 import axios from 'axios'
+import { MY_ORDER_RESET } from '../constants/orderConstansts'
 
 export const userLogin = (email, password) => async (dispatch) => {
     try {
@@ -88,6 +89,9 @@ export const logout = () => async(dispatch) => {
     dispatch({
         type : USER_LIST_RESET
     })
+
+    dispatch({ type: USER_PROFILE_RESET })
+    dispatch({ type: MY_ORDER_RESET })
     // dispatch({
     //     type : USER_PROFILE_RESET
     // })

@@ -5,7 +5,8 @@ import { getOrderDetails, orderToDelivered, payOrder} from '../actions/orderActi
 import './PlaceOrderScreen.css'
 import { PayPalButton } from 'react-paypal-button-v2'
 import { ORDER_PAY_RESET } from '../constants/orderConstansts'
-
+import Loading from '../components/Loading'
+import './OrderScreen.css'
 
 function OrderScreen() {
 
@@ -79,7 +80,7 @@ function OrderScreen() {
         dispatch(orderToDelivered(params.id))
     }
 
-    return loading ? <h1>Loading home... </h1> :
+    return loading ? <Loading className="loading__center"/>:
         error ? <h4>error</h4> :
     
     (
@@ -90,45 +91,47 @@ function OrderScreen() {
             
                 <div className="placeOrderScreen__First">
 
-                    <div className="placeOrderScreen__shipping">
-                                <h5>Your Order No : {order?._id }</h5>
-                        
-                        <h1>Shipping</h1>
+                            <div className="orderScreen__shipping" >
+                                <p>Your Order No : {order?._id }</p>
+                        <hr/>
+                                <h3>Shipping</h3>
                                 <p>Name : {order?.user?.name}</p>
                                 <p>Email : <a href={`mailto:${order?.user?.email}`}>{order?.user.email}</a> </p>
-                        shipping :
-                                {order?.shippingAddress.address},
-                                {order?.shippingAddress.city}
+                       
+                            
+                                <p>  shipping :  {order?.shippingAddress.address},
+                                 {order?.shippingAddress.city}
                                 {order?.shippingAddress.postalCode},
                                 {order?.shippingAddress.country}
 
                                 { order?.shippingAddress.landmark && "( landmark : " + order?.shippingAddress.landmark + " )"}
-
+                                </p>
                                 <p> Status : {order?.isDelivered ? `Delivered on ${order.deliveredAt}` : "Pending"} </p>
 
                     </div>
-
-                    <div className="placeOrderScreen__paymentMethod">
-                        <h1>Payment Method</h1>
+                        <hr/>
+                    <div className="OrderScreen__paymentMethod">
+                        <h3>Payment Method</h3>
                     Method :  {order?.paymentMethod}
 
                     <p> Status : {order?.isPaid ? `Paid on ${order.paidAt}` : "Pending"} </p>
                     </div>
 
+                        <hr/>
                     <div className="placeOrderScreen__cart">
-                        <h1>Order Items</h1>
+                        <h3>Order Items</h3>
 
                         {
                             order?.order.map(item => {
                                 return <div key={item._id} className="placeOrderScreen__cart__items">
                                 
                             
-                                <img src={item.image} alt={item.name} width="100px" className="placeOrderScreen__cart__items__image" />
+                                    <img src={item.image.split("/https")[1].replace("%3A/", "https://")} alt={item.name} width="100px" className="placeOrderScreen__cart__items__image" />
 
                                 <Link to={`/product/${item.product}`} className="placeOrderScreen__cart__items__name"> {item.name}</Link>
 
                                 <p className="placeOrderScreen__cart__items__qty">
-                                    {item.qty}  X {item.price}  =  {(item.qty * item.price).toFixed(2)}
+                                        {item.qty}  X {item.price}  =  {(item.qty * item.price).toFixed(2)} <i class="fas fa-rupee-sign"></i>
                                 </p>
 
 
@@ -143,30 +146,31 @@ function OrderScreen() {
                 <div className="placeOrderScreen__second">
                     {error && <p className="placeOrderScreen__error">{error}</p>}
 
-                    <h1>Order Summary</h1>
+                    <h3>Order Summary</h3>
 
                     <div>
                         <p>item</p>
-                        <p> ${order?.itemsPrice}</p>
+                                <p> {order?.itemsPrice} <i class="fas fa-rupee-sign"></i>
+                        </p>
                     </div>
 
                     <div>
                         <p>shipping Price</p>
-                        <p> ${order?.shippingPrice}</p>
+                                <p> {order?.shippingPrice} <i class="fas fa-rupee-sign"></i></p>
                     </div>
 
                     <div>
                         <p>tax</p>
-                        <p> ${order?.taxPrice}</p>
+                                <p> {order?.taxPrice} <i class="fas fa-rupee-sign"></i></p>
                     </div>
 
                     <div>
                         <p>Total</p>
-                        <p> ${order?.totalPrice}</p>
+                                <p> {order?.totalPrice} <i class="fas fa-rupee-sign"></i></p>
                     </div>
 
                     <div>
-                                {!order?.isPaid &&
+                                {!order?.isPaid && order?.itemsPrice != 0 &&
                                     (<div>
                                     
                                     {loadingPay && <p>loading pay..</p>}

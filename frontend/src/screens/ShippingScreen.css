@@ -46,3 +46,21 @@
     text-transform: uppercase;
     margin-top: 20px;
 }
+
+
+
+@media screen and (max-width:500px){
+    
+    .shipping__form{
+
+   
+    width: fit-content;
+    margin : 20px 0;
+}
+
+    .shipping__form >input[type="text"]{
+   
+        width: 95%;
+    }
+
+}

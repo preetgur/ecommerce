@@ -31,7 +31,7 @@
     font-family: monospace;
 }
 
-.placeOrderScreen__shipping >h1 , .placeOrderScreen__paymentMethod >h1,.placeOrderScreen__cart>h1{
+.placeOrderScreen__shipping >h3 , .placeOrderScreen__paymentMethod >h3,.placeOrderScreen__cart>h3{
 
   
     text-transform: uppercase;
@@ -85,4 +85,31 @@
 .placeOrderScreen__error{
     padding: 10px;
     background: rgb(245, 92, 92);
+}
+
+
+
+@media screen  and (max-width:500px){
+    .placeOrderScreen__container {
+    flex-direction: column;
+    width: 100%;
+    }
+
+    .placeOrderScreen__cart__items {
+
+        width: fit-content;
+    
+    }
+
+    .placeOrderScreen__second{
+        margin-top: 30px;
+    }
+
+    .placeOrderScreen__cart__items__image{
+        width: 70px;
+    }
+
+    .placeOrderScreen__cart__items__name{
+        font-size: smaller;
+    }
 }

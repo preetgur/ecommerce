@@ -5,6 +5,9 @@ import { logout } from '../actions/userActions'
 import './Header.css'
 import SearchBox from './SearchBox'
 
+import { Navbar, Nav, Container, Row, NavDropdown } from 'react-bootstrap' 
+import { LinkContainer } from 'react-router-bootstrap'
+
 function Header() {
 
     const userLogin = useSelector(state => state.userLogin)
@@ -17,63 +20,64 @@ function Header() {
         dispatch(logout())
     }
 
-    useEffect(() => {
-        
-       
-    }, [userInfo])
     
     return (
-        <div className="header">
-            <Link to="/" className="header__logo">
-                proshop
+        <>
+           
+            <Navbar bg="dark" variant="dark" expand="lg" collapseOnSelect>
+                <Container>
+                    <LinkContainer to='/'>
+                        <Navbar.Brand>G-Shop</Navbar.Brand>
+                    </LinkContainer>
 
-            </Link>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <SearchBox />
+                        <Nav className="ml-auto">
 
-            <SearchBox/>
+                            <LinkContainer to='/cart'>
+                                <Nav.Link ><i className="fas fa-shopping-cart"></i>Cart</Nav.Link>
+                            </LinkContainer>
 
-            <div className="header__options">
-                <div className="header__options__one">
-                    <Link to="/cart">
-                        <i className="fas fa-shopping-cart"></i> cart
+                            {userInfo ? (
+                                <NavDropdown title={userInfo.name} id='username'>
+                                    <LinkContainer to='/profile'>
+                                        <NavDropdown.Item>Profile</NavDropdown.Item>
+                                    </LinkContainer>
 
-                    </Link>
-                </div>
-                <div className="header__options__two">
-                    {userInfo && <Link to="/profile">{userInfo.username} </Link>}
-                    
-                         
-                </div>
+                                    <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
 
-                <div className="header__options__two">
-                    
-                    {userInfo?._id ?
-                        <button className="header__logout" onClick={logoutHandler}>
-                            Logout
-                        </button> :
-                        <Link to="/login">
-                            <i className="fas fa-user"></i>
-                                login
-                            </Link>
-                    }
+                                </NavDropdown>
+                            ) : (
+                                <LinkContainer to='/login'>
+                                    <Nav.Link><i className="fas fa-user"></i>Login</Nav.Link>
+                                </LinkContainer>
+                            )}
 
 
-                </div>
-                
+                            {userInfo && userInfo.isAdmin && (
+                                <NavDropdown title='Admin' id='adminmenue'>
+                                    <LinkContainer to='/admin/userlist'>
+                                        <NavDropdown.Item>Users</NavDropdown.Item>
+                                    </LinkContainer>
 
-                <div className="header__options__two">
-                    {userInfo && userInfo.isAdmin && (<div class="dropdown">
-                        <button class="dropbtn">Admin</button>
-                        <div class="dropdown-content">
-                            <Link to={"/admin/userlist"}>users</Link>
-                            <Link to={"/admin/productlist"}>Products</Link>
-                            <Link to={"/admin/orderlist"}>Orders</Link>
-                        </div>
-                    </div>)}
+                                    <LinkContainer to='/admin/productlist'>
+                                        <NavDropdown.Item>Products</NavDropdown.Item>
+                                    </LinkContainer>
 
-                </div>
+                                    <LinkContainer to='/admin/orderlist'>
+                                        <NavDropdown.Item>Orders</NavDropdown.Item>
+                                    </LinkContainer>
 
-            </div>
-        </div>
+                                </NavDropdown>
+                            )}
+
+
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
+        </>
     )
 }
 

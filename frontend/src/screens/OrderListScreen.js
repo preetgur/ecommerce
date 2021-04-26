@@ -4,6 +4,9 @@ import { Link, useHistory } from 'react-router-dom'
 import { orderListAdmin } from '../actions/orderActions'
 import { deleteProduct, listProduct } from '../actions/productActions'
 import { deleteUser, userDelete, userList as userListAction } from '../actions/userActions'
+
+import { LinkContainer } from 'react-router-bootstrap'
+import { Table, Button, Row, Col } from 'react-bootstrap'
 import "./UserListScreen.css"
 
 function OrderListScreen() {
@@ -31,18 +34,18 @@ function OrderListScreen() {
     }, [dispatch])
 
 
-    
-
     return (
         <div className="userListScreen">
-            <h1>Order List</h1>
+            <h3>Order List</h3>
        
-\
+
             <div className="userListScreen__First">
                 {loading ? "loading Product list.." :
                     error ? <p>{error}</p> :
                         (
-                            <table>
+                            <Table striped bordered hover responsive className='table-sm'>
+                                <thead>
+                                  
                                 <tr>
                                     <th>ID</th>
                                     <th>Name</th>
@@ -53,7 +56,11 @@ function OrderListScreen() {
                                     <th></th>
 
                                 </tr>
+                                </thead>
 
+                                <tbody>
+
+                              
                                 {orders?.map((order) => (
                                     <tr key={order._id}>
                                         
@@ -62,26 +69,22 @@ function OrderListScreen() {
                                         <td>{order.createdAt.substring(0,10)}</td>
 
                                         <td>{order.totalPrice}</td>
-                                        <td>{order.isPaid?order.paidAt.substring(0,10) : "Not Paid"}</td>
+                                        <td>{order.isPaid ? <i class="far fa-check-circle text-center text-success"></i>: "Not Paid"}</td>
 
-                                         <td>{order.isDelivered?order.deliveredAt.substring(0,10) : "pending"}</td>
+                                        <td>{order.isDelivered ? <i class="far fa-check-circle m-auto text-success"></i>: "pending"}</td>
 
                                         <td>{
                                             <Link to={`/order/${order._id}`}>
                                                 Details
                                             </Link>}
-
-
                                         </td>
-
-
 
                                     </tr>
                                 ))
                                 }
 
-
-                            </table>
+                                </tbody>
+                            </Table>
                         )
                 }
             </div>

@@ -5,9 +5,20 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from django.contrib.auth.models import User
 from rest_framework.response import Response 
 from base.models import ShippingAddress,Order,OrderItem,Product
-from base.serializers import ShippingAddressSerializer,OrderSerializer
+from base.serializers import ShippingAddressSerializer,OrderSerializer,OrderItemSerializer
 from rest_framework import status
 from datetime import datetime
+
+@api_view(['GET'])
+def orderItemImage(request,pk):
+    order = OrderItem.objects.get(_id=pk)
+    pro = Product.objects.get(_id=pk)
+    print("pro ##### ",pro.image.url)
+    if order : 
+        serialzier = OrderItemSerializer(order,many=False)
+        return Response(serialzier.data)
+
+    return Response({"details" : "some error occured"})
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])  
@@ -80,11 +91,14 @@ def addOrderItem(request):
                 image = product.image.url
             )
 
+            print("ordreitem $$$$$$$$$$ ",orderItem.image)
             # update stock
             product.countInStock -= int(orderItem.qty)
             product.save()
 
         serializer = OrderSerializer(order,many=False)
+
+        print("Ordre Serialzier @1!!!!!!!!!!!!! ",serializer.data)
     return Response(serializer.data)
 
     
@@ -96,7 +110,7 @@ def getOrderById(request,pk):
     try :
         user  = request.user
         order = Order.objects.get(_id =pk)
-
+        
         if user.is_staff or order.user == user:
             serializer = OrderSerializer(order,many=False)
             return Response(serializer.data)

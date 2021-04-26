@@ -18,7 +18,41 @@
     font-family: sans-serif;
 }
 
+.checkoutSteps__link:hover{
+    text-decoration: none;
+
+}
+
 .checkoutSteps__disabled{
     border: none;
+    /* color: lightgrey; */
+}
+
+
+
+@media screen and (max-width:500px) {
+    
+    .checkoutSteps{
+        font-size: small;
+        width: 100%;
+    }
+
+
+    .checkoutSteps__link{
+
+    
+    color: green;
+        display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+}
+
+
+    .checkoutSteps__disabled{
+        background: none;
+    border: none;
     color: lightgrey;
+}
 }

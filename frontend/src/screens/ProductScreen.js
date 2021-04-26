@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router'
 import { Link } from 'react-router-dom'
 import Rating from '../components/Rating'
+import AlertMessage from '../components/AlertMessage'
+
 import './ProductScreen.css'
 
 import { detailProduct, reviewProduct } from '../actions/productActions'
@@ -76,13 +78,20 @@ function ProductScreen() {
                             {/* <hr/> */}
 
                             <Rating className="productScreen__rating padding" value={product.rating} no_of_reviews={` ${product.numReviews} reviews`} />
-                            <p className="productScrren__price padding"> <span>Price :</span> {product.price}</p>
+                            <p className="productScrren__price padding">
+                                <span>Price :</span>
+                                <p>
+                                {product.price} <i class="fas fa-rupee-sign"></i>
+                                </p>
+                            </p>
                             <p className="productScreen__description ">Description : {product.description}</p>
                         </div>
 
                         <div className="productScreen__row3">
-                            <div className="productScreen__row3__price">Price :{product.price}</div>
-                            <div className="productScreen__row3__status">status :{product.countInStock > 0 ? "In Stock" : "Out of Stock"}</div>
+                            
+                            <div className="productScreen__row3__status">
+                                status : <p> {product.countInStock > 0 ? "In Stock" : "Out of Stock"}</p>
+                            </div>
 
                             {product.countInStock > 0 &&
                                 <div className="productScreen__row3__qty">
@@ -112,7 +121,7 @@ function ProductScreen() {
 
                             {product.reviews.map(review => (
                                 <div className="productScreen__review__detail" key={review._id}> 
-                                <h5>{review.name}</h5>
+                                    <strong>By : {review.name ? review.name : "Anonymous"}</strong>
                                     
                                     <p>{review.comment}</p>
                                     <Rating value={review.rating} />
@@ -126,9 +135,15 @@ function ProductScreen() {
                             <div className="productScreen__review__second">
 
                             {userInfo?.username && (<div className="productScreen__write__review">
-                            <h3>Write a Review</h3>
-                            {errroReview && errroReview}
-                            {loadingReview && "loading Review .."}
+                                    <h3>Write a Review</h3>
+                                    
+                                    <p>  {errroReview &&
+                                        <AlertMessage variant="danger">
+                                            {errroReview}
+                                        </AlertMessage>}    
+                                    </p>
+                                    
+                                    <p> {loadingReview && "loading Review .."} </p>
 
 
                            Rating : <select value={rating} onChange={(e) => setRating(e.target.value)}>
@@ -141,9 +156,9 @@ function ProductScreen() {
 
                             </select>
 
-                           comment : <textarea rows="8" cols="10" value={comment} onChange={ e => setComment(e.target.value)}></textarea>
+                           comment : <textarea rows="4" cols="8" value={comment} onChange={ e => setComment(e.target.value)}></textarea>
                             
-                            <input type="submit" onClick={createReviewHandler} />
+                            <input className="reviewsubmit_btn" type="submit" onClick={createReviewHandler} />
                             
                          </div>    )}
                             </div>

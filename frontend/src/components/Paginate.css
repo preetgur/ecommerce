@@ -1,5 +1,7 @@
 .paginate{
     display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .p{
     padding: 10px;
@@ -8,5 +10,5 @@
 .current_page{
     color : white;
     padding:10px;
-    background: rgb(0, 0, 194) !important;
+    background: rgb(49, 49, 253) !important;
 }   

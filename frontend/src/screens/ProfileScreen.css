@@ -1,4 +1,4 @@
-table {
+/* table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 100%;
@@ -12,7 +12,7 @@ td, th {
 
 tr:nth-child(even) {
   background-color: #dddddd;
-}
+} */
 
 .profileScreen__container
 {
@@ -54,4 +54,16 @@ tr:nth-child(even) {
 
 .profileScreen__email,.profileScreen__name, .profileScreen__password{
     display: flex;
+}
+
+
+@media screen and (max-width:500px){
+  
+  .profileScreen__container{
+    flex-direction: column;
+  }
+
+  table{
+    margin-top:30px;
+  }
 }

@@ -15,7 +15,7 @@ function Product({product}) {
 
             </Link>
             
-           <small className="product__price">{product.price} $ </small>
+            <small className="product__price">{product.price} <i class="fas fa-rupee-sign"></i> </small>
             {/* <p>{product.rating} from {product.numReviews} reviews</p> */}
             <Rating value={product.rating} no_of_reviews={` ${product.numReviews} reviews `} />
             
