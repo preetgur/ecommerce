@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { logout } from '../actions/userActions'
 import './Header.css'
 import SearchBox from './SearchBox'
@@ -11,6 +11,7 @@ import { LinkContainer } from 'react-router-bootstrap'
 function Header() {
 
     const userLogin = useSelector(state => state.userLogin)
+    const history = useHistory()
     const { userInfo } = userLogin
     const dispatch = useDispatch()
     // const userInfo = JSON.parse(localStorage.getItem('userInfo'))
@@ -18,6 +19,7 @@ function Header() {
     
     const logoutHandler = () => {
         dispatch(logout())
+        
     }
 
     
@@ -30,6 +32,7 @@ function Header() {
                         <Navbar.Brand>G-Shop</Navbar.Brand>
                     </LinkContainer>
 
+               
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <SearchBox />
@@ -39,7 +42,7 @@ function Header() {
                                 <Nav.Link ><i className="fas fa-shopping-cart"></i>Cart</Nav.Link>
                             </LinkContainer>
 
-                            {userInfo ? (
+                            {userInfo?.email && (
                                 <NavDropdown title={userInfo.name} id='username'>
                                     <LinkContainer to='/profile'>
                                         <NavDropdown.Item>Profile</NavDropdown.Item>
@@ -48,8 +51,10 @@ function Header() {
                                     <NavDropdown.Item onClick={logoutHandler}>Logout</NavDropdown.Item>
 
                                 </NavDropdown>
-                            ) : (
-                                <LinkContainer to='/login'>
+                            )}
+                            
+                            {!userInfo?.email && (
+                                <LinkContainer to={'/login'}>
                                     <Nav.Link><i className="fas fa-user"></i>Login</Nav.Link>
                                 </LinkContainer>
                             )}

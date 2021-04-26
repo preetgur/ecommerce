@@ -28,6 +28,16 @@
     /* color: lightgrey; */
 }
 
+.loading__center{
+    margin-bottom: 50vh;
+}
+.loading__center{
+
+    position: relative;
+ top: 50%;
+ left :50%;
+ transform: translate(-50%,-50%);
+}
 
 
 @media screen and (max-width:500px) {

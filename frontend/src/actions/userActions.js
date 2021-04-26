@@ -37,7 +37,7 @@ import {
 
 } from '../constants/userConstants'
 import axios from 'axios'
-import { MY_ORDER_RESET } from '../constants/orderConstansts'
+import { MY_ORDER_RESET, ORDER_LIST_ADMIN_RESET } from '../constants/orderConstansts'
 
 export const userLogin = (email, password) => async (dispatch) => {
     try {
@@ -92,6 +92,8 @@ export const logout = () => async(dispatch) => {
 
     dispatch({ type: USER_PROFILE_RESET })
     dispatch({ type: MY_ORDER_RESET })
+    dispatch({ type: USER_LIST_RESET })
+    dispatch({ type: ORDER_LIST_ADMIN_RESET})
     // dispatch({
     //     type : USER_PROFILE_RESET
     // })
@@ -162,7 +164,7 @@ export const userProfile = (id) => async(dispatch,getState) =>{
                 Authorization: `Bearer ${userInfo.token}`,
             } 
         }
-        const { data } = await axios.get(`api/users/${id}`, config)
+        const { data } = await axios.get(`api/users/profile/`, config)
         console.log('data.. ',data);
         
 
@@ -185,7 +187,7 @@ export const userProfile = (id) => async(dispatch,getState) =>{
 
 
 
-export const userUpdateProfile = (email,name,password) => async(dispatch,getState) =>{
+export const userUpdateProfile = (email,name,password,isActive) => async(dispatch,getState) =>{
 
     try {
 
@@ -210,7 +212,8 @@ export const userUpdateProfile = (email,name,password) => async(dispatch,getStat
         const details = {
             "name":name,
             "email": email,
-            "password": password
+            "password": password,
+            isActive
         }
 
         console.log('details ..',details);

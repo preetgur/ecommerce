@@ -6,8 +6,10 @@ function Loading({ message }) {
     return (
         <>
             
+            <div className="loading">
 
-            <Button variant="dark" disabled>
+            
+            <Button variant="dark" className="loading__center" disabled>
                 <Spinner
                     as="span"
                     animation="border"
@@ -17,6 +19,7 @@ function Loading({ message }) {
                 />
                 Loading {message} ...
             </Button>
+            </div>
         </>
     )
 }

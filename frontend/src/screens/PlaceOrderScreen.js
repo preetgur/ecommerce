@@ -11,6 +11,9 @@ function PlaceOrderScreen() {
     const dispatch = useDispatch()
     const history = useHistory()
 
+    const userLogin = useSelector(state => state.userLogin)
+    const {userInfo} = userLogin
+
     const orders = useSelector(state => state.order)
     
     const {loading,error,success,order} = orders
@@ -51,11 +54,16 @@ function PlaceOrderScreen() {
     }
 
     useEffect(() => {
+
+        if (!userInfo.email) {
+            history.push('/login')
+        }
+
         if (success) {
             history.push(`/order/${order._id}`)
         }
 
-    }, [success,history])
+    }, [success,history,userInfo.email])
     return (
         <div className="placeOrderScreen">
             
@@ -69,7 +77,7 @@ function PlaceOrderScreen() {
                     <div className="placeOrderScreen__shipping">
                       
                     <h3>Shipping</h3>
-                    shipping : {shipping.address}, {shipping.city} {shipping.postalCode},{shipping.country} {"( landmark : " + shipping.landmark + " )"}
+                    shipping : {shipping.address}, {shipping.city} , {shipping.postalCode},{shipping.country} {"( landmark : " + shipping.landmark + " )"}
                 </div>
 
                 <div className="placeOrderScreen__paymentMethod">

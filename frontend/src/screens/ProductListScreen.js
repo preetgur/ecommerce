@@ -34,7 +34,7 @@ function ProductListScreen() {
       
         dispatch({ type: PRODUCT_CREATE_RESET })
 
-        if (!userInfo.isAdmin) {
+        if (!userInfo?.isAdmin) {
             history.push('/login')
         }
 
@@ -43,7 +43,7 @@ function ProductListScreen() {
         } else {
             dispatch(listProduct(keyword))
         }
-    }, [dispatch, successDelete, keyword, successCreate, createdProduct])
+    }, [dispatch, successDelete, keyword, successCreate, createdProduct,userInfo])
 
 
     const deleteHandler = (id) => {

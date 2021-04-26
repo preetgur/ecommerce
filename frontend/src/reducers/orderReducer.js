@@ -18,9 +18,12 @@ import {
     MY_ORDER_SUCCESS,
     MY_ORDER_FAIL,
     MY_ORDER_RESET,
+
     ORDER_LIST_ADMIN_REQUEST,
     ORDER_LIST_ADMIN_SUCCESS,
     ORDER_LIST_ADMIN_FAIL,
+    ORDER_LIST_ADMIN_RESET,
+
     ORDER_TO_DELIVERED_REQUEST,
     ORDER_TO_DELIVERED_SUCCESS,
     ORDER_TO_DELIVERED_FAIL,
@@ -136,6 +139,9 @@ export const orderListReducer = (state = {}, action) => {
 
         case ORDER_LIST_ADMIN_FAIL:
             return { loading: false, error: action.payload }
+
+        case ORDER_LIST_ADMIN_RESET:
+            return {}
 
 
         default:

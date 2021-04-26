@@ -8,6 +8,7 @@ import { deleteUser, userDelete, userList as userListAction } from '../actions/u
 import { LinkContainer } from 'react-router-bootstrap'
 import { Table, Button, Row, Col } from 'react-bootstrap'
 import "./UserListScreen.css"
+import Loading from '../components/Loading'
 
 function OrderListScreen() {
 
@@ -40,7 +41,7 @@ function OrderListScreen() {
        
 
             <div className="userListScreen__First">
-                {loading ? "loading Product list.." :
+                {loading ? <Loading message="order list" /> :
                     error ? <p>{error}</p> :
                         (
                             <Table striped bordered hover responsive className='table-sm'>

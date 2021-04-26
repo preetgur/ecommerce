@@ -95,6 +95,7 @@ def updateUserProfile(request):
     user.first_name = data['name']
     user.username = data['email']
     user.email = data['email']
+    user.is_active = data['isActive']
 
     if data['password'] != "":
         user.password = make_password(data['password'])
@@ -143,6 +144,7 @@ def updateUserAdmin(request,pk):
     user.username = data['email']
     user.email = data['email']
     user.is_staff = data['isAdmin']
+    user.is_active = data['isActive']
 
     user.save()
     serialzer = UserSerializer(user,many=False) 

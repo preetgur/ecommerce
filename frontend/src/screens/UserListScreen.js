@@ -50,10 +50,11 @@ function UserListScreen() {
         <div className="userListScreen">
             <h3>Users</h3>
             {loading
-                ? (<Loading />)
+                ? (<Loading message="user list"/>)
                 : error
                     ? (<AlertMessage variant='danger'>{error}</AlertMessage>)
                     : (
+                        
                         <Table striped bordered hover  className='table-sm' responsive="sm"  size="sm" >
                             <thead>
                                 <tr>

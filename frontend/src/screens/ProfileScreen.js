@@ -35,7 +35,7 @@ function ProfileScreen() {
 
     useEffect(() => {
 
-        if (!userInfo) {
+        if (!userInfo ) {
             history.push("/login")
         }
 
@@ -45,7 +45,7 @@ function ProfileScreen() {
                 dispatch({
                     type: USER_UPDATE_PROFILE_RESET
                 })
-                dispatch((userProfile(userInfo._id)))
+                dispatch((userProfile(userInfo._id)))   // dispatch userprofile action
                 dispatch(myOrder())
             }
             else {
@@ -57,7 +57,7 @@ function ProfileScreen() {
 
             }
         }
-    }, [dispatch, history, user, success])
+    }, [dispatch, history, user, success,userInfo?.email])
 
     const profileUpdateHandler = (e) => {
         e.preventDefault();
@@ -70,7 +70,7 @@ function ProfileScreen() {
 
         else {
 
-            dispatch(userUpdateProfile(email, name, password))
+            dispatch(userUpdateProfile(email, name, password,isActive))
         }
 
     }
@@ -147,8 +147,11 @@ function ProfileScreen() {
 
                 <div className="profileScreen__second">
 
-                    {
-                        loadingOrder && order ? "some error occured while fetching the user orderList" : <>
+                    {    loadingOrder ? (
+                    "Loading Orders.."
+                ) : errorOrder ? (
+                    history.push('/login')
+                ) : <>
                         
                             <Table striped bordered hover className='table-sm' responsive="sm" size="sm">
                                 <thead>
@@ -165,7 +168,7 @@ function ProfileScreen() {
 
                                 <tbody>
                                 
-                        {order?.map((item) => (
+                        {user?.email && order && order?.map((item) => (
                             <tr key={item._id}>
                                 <td>{item._id}</td>
                                 <td>{item.createdAt.substring(0, 10)}</td>

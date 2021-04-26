@@ -36,6 +36,8 @@ function ProductScreen() {
 
     useEffect(() => {
 
+        
+
         if (successReview) {
 
             setRating(0)

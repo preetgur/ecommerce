@@ -22,7 +22,7 @@ function LoginScreen() {
     const { loading, error, userInfo } = loginDetail
 
     useEffect(() => {
-        if (userInfo) {
+        if (userInfo?.email) {
             history.push(redirect)
         }
         
