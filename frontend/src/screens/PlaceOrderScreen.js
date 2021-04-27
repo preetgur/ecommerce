@@ -77,7 +77,7 @@ function PlaceOrderScreen() {
                     <div className="placeOrderScreen__shipping">
                       
                     <h3>Shipping</h3>
-                    shipping : {shipping.address}, {shipping.city} , {shipping.postalCode},{shipping.country} {"( landmark : " + shipping.landmark + " )"}
+                    shipping : {shipping.address}, {shipping.city} , {shipping.postalCode},{shipping.country} { shipping.landmark && "( landmark : " + shipping.landmark + " )"}
                 </div>
 
                 <div className="placeOrderScreen__paymentMethod">

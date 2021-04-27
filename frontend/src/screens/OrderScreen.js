@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useHistory, useParams } from 'react-router-dom'
 import { getOrderDetails, orderToDelivered, payOrder} from '../actions/orderActions'
 import './PlaceOrderScreen.css'
 import { PayPalButton } from 'react-paypal-button-v2'
@@ -14,6 +14,7 @@ function OrderScreen() {
     const dispatch = useDispatch()  
     const params = useParams()
     
+    const history = useHistory()
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
@@ -44,6 +45,10 @@ function OrderScreen() {
 
     useEffect(() => {
        
+        if (!userInfo?.email) {
+            history.push('/login')
+        }
+
         if (!order  || order._id !== params.id) {
 
             dispatch({ type: ORDER_PAY_RESET })
@@ -60,7 +65,7 @@ function OrderScreen() {
                 }
         }
 
-    }, [params.id, successPay, successDelivered])
+    }, [params.id, successPay, successDelivered,userInfo.email])
 
 
     const successPaymentHandler = (paymentResult) => {
