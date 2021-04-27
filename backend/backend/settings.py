@@ -20,7 +20,7 @@ SECRET_KEY = 'g+#l&w*!9!k5@jjnd2b6koq)kx82oe326pxvkofko&lm^nfc8^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1','localhost']
 
 
 # Application definition
@@ -82,6 +82,7 @@ SIMPLE_JWT = {
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',  # top of middleware
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -183,7 +184,8 @@ STATICFILES_DIRS = [
 
 ]
 
-MEDIA_ROOT = 'static/images'  # for user upload
+MEDIA_ROOT = BASE_DIR/'static/images'  # for user upload
+STATIC_ROOT = BASE_DIR/ 'staticfiles'
 
 CORS_ALLOW_ALL_ORIGINS = True
 
@@ -194,3 +196,6 @@ AWS_ACCESS_KEY_ID = "AKIA3SFJSCLSKYORA2NQ"
 AWS_SECRET_ACCESS_KEY = "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"
 
 AWS_STORAGE_BUCKET_NAME = "proshop-bucket-0137"
+
+if os.getcwd() == '/app':
+    DEBUG = False
