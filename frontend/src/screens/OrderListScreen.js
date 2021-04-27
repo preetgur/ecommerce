@@ -37,13 +37,14 @@ function OrderListScreen() {
 
     return (
         <div className="userListScreen">
-            <h3>Order List</h3>
        
 
             <div className="userListScreen__First">
                 {loading ? <Loading message="order list" /> :
                     error ? <p>{error}</p> :
-                        (
+                        (<>
+                            <h3 className="text-center">Order List</h3>
+
                             <Table striped bordered hover responsive className='table-sm'>
                                 <thead>
                                   
@@ -86,7 +87,8 @@ function OrderListScreen() {
 
                                 </tbody>
                             </Table>
-                        )
+                        </>)    
+                        
                 }
             </div>
         </div>

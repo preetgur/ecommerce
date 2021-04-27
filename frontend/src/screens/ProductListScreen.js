@@ -8,6 +8,7 @@ import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
 import { LinkContainer } from 'react-router-bootstrap'
 import { Table, Button, Row, Col } from 'react-bootstrap'
 import "./UserListScreen.css"
+import Loading from '../components/Loading'
 
 function ProductListScreen() {
 
@@ -78,7 +79,7 @@ function ProductListScreen() {
 
 
             <div className="userListScreen__First">
-                {loading ? "loading Product list.." :
+                {loading ? <Loading message="Product List.."/> :
                     error ? <p>{error}</p> :
                         (
 
